@@ -9,7 +9,7 @@ email: oscar99.cr@gmail.com<br>
 
 #### Description
 Proyecto 1 EDD
-Aplicación permita manejar una biblioteca de música de forma dinámica. La aplicación se desarrollo utilizando el lenguaje de
+Aplicación permite el manejo de una biblioteca de música de forma dinámica. La aplicación se desarrollo utilizando el lenguaje de
 programación C++. Esta solución para que los usuarios 
 tengan una experiencia diferente en el manejo de su música, siendo una aplicación intuitiva y
 fácil de utilizar con un diseño atractivo para el usuario.
