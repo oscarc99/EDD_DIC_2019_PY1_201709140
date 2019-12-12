@@ -2,10 +2,11 @@
 #define ARTISTA_H
 #include <string>
 
+using namespace std;
 class Artista
 {
     public:
-        Artista();
+        Artista(string nombre);
         virtual ~Artista();
         string getName(){return Name;}
 

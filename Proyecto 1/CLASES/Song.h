@@ -2,17 +2,16 @@
 #define SONG_H
 #include <string>
 
+using namespace std;
+
 class Song
 {
     public:
-        Song(string nombre, string archivo, double puesto){
-            Name = nombre;
-            File = archivo;
-            Ranking = puesto;
-        }
+        Song(string nombre, string archivo, double puesto);
+
         string getName(){return Name;}
         string getFile(){return File;}
-        double getRanking(return Ranking;)
+        double getRanking(){return Ranking;}
         virtual ~Song();
 
     private:
@@ -22,4 +21,3 @@ class Song
 };
 
 #endif // SONG_H
-

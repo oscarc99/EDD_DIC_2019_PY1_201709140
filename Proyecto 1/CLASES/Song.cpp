@@ -1,8 +1,11 @@
 #include "Song.h"
 
-Song::Song()
+Song::Song(string nombre, string archivo, double puesto)
 {
-    //ctor
+     Name = nombre;
+            File = archivo;
+            Ranking = puesto;
+
 }
 
 Song::~Song()
