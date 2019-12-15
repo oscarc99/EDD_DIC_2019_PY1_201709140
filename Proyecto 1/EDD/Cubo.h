@@ -16,6 +16,8 @@ class Cubo
         NodoC* crearColumna(int X);
         NodoC* crearFila(string Y);
         void insertAlbum(int X, string Y,Album* alb);
+        void generarReporte(string name);
+        bool isEmpty();
 
 
 

@@ -54,9 +54,7 @@
 		<Unit filename="EDD/Cola.h" />
 		<Unit filename="EDD/Cubo.cpp" />
 		<Unit filename="EDD/Cubo.h" />
-		<Unit filename="EDD/ListaDoble.cpp" />
 		<Unit filename="EDD/ListaDoble.h" />
-		<Unit filename="EDD/ListaSimple.cpp" />
 		<Unit filename="EDD/ListaSimple.h" />
 		<Unit filename="EDD/NodoC.cpp" />
 		<Unit filename="EDD/NodoC.h" />
@@ -64,9 +62,12 @@
 		<Unit filename="EDD/Pila.h" />
 		<Unit filename="EDD/arbolbin.cpp" />
 		<Unit filename="EDD/arbolbin.h" />
+		<Unit filename="EDD/discografy.cpp" />
+		<Unit filename="EDD/discografy.h" />
 		<Unit filename="EDD/hoja.cpp" />
 		<Unit filename="EDD/hoja.h" />
-		<Unit filename="EDD/listadoblecircular.cpp" />
+		<Unit filename="EDD/listadartistas.cpp" />
+		<Unit filename="EDD/listadartistas.h" />
 		<Unit filename="EDD/listadoblecircular.h" />
 		<Unit filename="json.hpp" />
 		<Unit filename="main.cpp" />

@@ -77,6 +77,7 @@ void ListaDoble<T>::add_first(T dato)
         this->first = n;
         this->last = n;
         this->size++;
+
     }
     else
     {
@@ -84,6 +85,7 @@ void ListaDoble<T>::add_first(T dato)
         this->first->setBefore(n);
         this->first = n;
         this->size++;
+
     }
 }
 
@@ -93,6 +95,7 @@ void ListaDoble<T>::add_last(T dato)
     if(this->isEmpty())
     {
         this->add_first(dato);
+
     }
     else
     {
@@ -101,6 +104,7 @@ void ListaDoble<T>::add_last(T dato)
         n->setBefore(this->last);
         this->last = n;
         this->size++;
+
     }
 }
 
@@ -125,6 +129,7 @@ void ListaDoble<T>::add_at(T dato, int index)
         n->setNext(aux);
         aux->setBefore(n);
         this->size++;
+
     }
 }
 

@@ -126,6 +126,9 @@ T ListaSimple<T>::get_element_at(int index)
             iterador = iterador->getNext();
             x++;
         }
+    }else{
+
+        return 0;
     }
 
 }
@@ -133,16 +136,16 @@ T ListaSimple<T>::get_element_at(int index)
 template <class T>
 void ListaSimple<T>::remove_at(int index)
 {
-    Nodo *aux = this->first;
     if(index >= 0 && index < size)
     {
+        Nodo *aux = this->first;
         if(index ==0){
 
             this->first = aux->getNext();
             this->size--;
             return;
         }
-        Nodo *aux = this->first;
+
         int x = 0;
         while(aux!=0)
         {
@@ -164,5 +167,6 @@ void ListaSimple<T>::remove_at(int index)
 
 
     }
+
 }
-#endif // ISTADOBLE_H
+#endif // LISTASIMPLE_H

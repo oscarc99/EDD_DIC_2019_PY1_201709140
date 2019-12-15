@@ -1,7 +1,7 @@
 #ifndef ARBOLBIN_H
 #define ARBOLBIN_H
 #include "hoja.h"
-
+#include <string>
 
 class ArbolBin
 {

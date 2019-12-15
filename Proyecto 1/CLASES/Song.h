@@ -7,17 +7,25 @@ using namespace std;
 class Song
 {
     public:
-        Song(string nombre, string archivo, double puesto);
+        Song(string nombre, double puesto);
+        Song(string nombre, double puesto, string ano, string mes, string album, string artista);
 
         string getName(){return Name;}
-        string getFile(){return File;}
+        string getMonth(){return mes;}
+        string getAlbum(){return album;}
+        string getArtist(){return artist;}
+
+
         double getRanking(){return Ranking;}
         virtual ~Song();
 
     private:
         string Name;
-        string File;
         double Ranking;
+        string ano;
+        string mes;
+        string album;
+        string artist;
 };
 
 #endif // SONG_H
