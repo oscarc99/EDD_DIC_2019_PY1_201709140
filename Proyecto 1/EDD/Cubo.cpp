@@ -228,7 +228,7 @@ void Cubo::generarReporte(string nameArt)
         while(Head->getDerecha() != 0)
         {
             ///creando nodo
-            nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+            nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
             ///lista alineados
             alinea = alinea+  "node"+Head->getY()+to_string(Head->getX())+" ;";
 
@@ -264,7 +264,95 @@ void Cubo::generarReporte(string nameArt)
 
         alinea = alinea + "} \n";
         Head = Head->getAdelante();
+        if(Head->getAdelante() ==0)
+        {
+            alinea = alinea + "{ rank = same;";
+            ///recorro de ia la fila selecionada
+            while(Head->getDerecha() != 0)
+            {
+                ///creando nodo
+                nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                ///lista alineados
+                alinea = alinea+  "node"+Head->getY()+to_string(Head->getX())+" ;";
+
+                ///direccion de los apuntadores
+                if (Head->getDerecha() != 0)
+                {
+                    dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getDerecha()->getY()+""+to_string(Head->getDerecha()->getX())+ "[constraint=false]; \n";
+                }
+
+                Head = Head->getDerecha();
+                if(Head->getDerecha()==0)
+                {
+                    ///creando nodo
+                    nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                    ///lista alineados
+                    alinea = alinea+  "node"+Head->getY()+to_string(Head->getX())+" ;";
+                }
+            }
+
+            ///Debo regresar (izquierda) a root
+            while(Head->getIzquierda() != 0)
+            {
+                if (Head->getIzquierda() != 0)
+                {
+                    dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getIzquierda()->getY()+""+to_string(Head->getIzquierda()->getX())+ "[constraint=false]; \n";
+                }
+
+                Head = Head->getIzquierda();
+
+            }
+            alinea = alinea + "} \n";
+        }
+
+
     }
+
+    Head = this->getRoot();
+    ///RECORRO POR COLUMNA (UNICAMENTE UNION)
+    while(Head->getDerecha() != 0)
+    {
+        while (Head->getAdelante()!= 0)
+        {
+
+            dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAdelante()->getY()+""+to_string(Head->getAdelante()->getX())+ "; \n";
+
+            Head = Head->getAdelante();
+
+        }
+        while (Head->getAtras()!= 0)
+        {
+
+            dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAtras()->getY()+""+to_string(Head->getAtras()->getX())+ "; \n";
+            Head= Head->getAtras();
+        }
+
+
+        Head = Head->getDerecha();
+        if(Head->getDerecha()==0)
+        {
+            while (Head->getAdelante()!= 0)
+        {
+
+            dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAdelante()->getY()+""+to_string(Head->getAdelante()->getX())+ "; \n";
+
+            Head = Head->getAdelante();
+
+        }
+        while (Head->getAtras()!= 0)
+        {
+
+            dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAtras()->getY()+""+to_string(Head->getAtras()->getX())+ "; \n";
+            Head= Head->getAtras();
+        }
+
+        }
+
+
+
+
+    }
+
     ///Agregamos strings´s a archivos y lo generamos
     archivo << nodo;
     archivo << dir;
@@ -272,7 +360,7 @@ void Cubo::generarReporte(string nameArt)
     archivo <<"}";
 
     archivo.close();
-    string crear = "neato -Tpng report\\" +nameArt+"_Discografy.dot -o report\\" + nameArt+ "_Discografy.png";
+    string crear = "dot.exe -Tpng report\\" +nameArt+"_Discografy.dot -o report\\" + nameArt+ "_Discografy.png";
     system(crear.c_str());
     string i = "report\\"+ nameArt+"_Discografy.png";
     system(i.c_str());

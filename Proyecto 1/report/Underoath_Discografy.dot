@@ -1,17 +1,30 @@
 digraph R { 
 rankdir = TB;node [shape=rectangle, height=0.5, width=0.5];
 graph[ nodesep = 0.5];
-nodeMESES0 [label = = "  (MESES , 0 ) root  " ]; 
-nodeMESES2004 [label = = "  (MESES , 2004 ) MESES  " ]; 
+nodeMESES0 [label = "  (MESES , 0 ) root  " ]; 
+nodeMESES2004 [label = "  (MESES , 2004 ) MESES  " ]; 
 nodeMESES2018 [label = "  (MESES , 2018 ) MESES  " ]; 
-nodeJulio0 [label = = "  (Julio , 0 ) FILA  " ]; 
+nodeJulio0 [label = "  (Julio , 0 ) FILA  " ]; 
 nodeJulio2004 [label = "  (Julio , 2004 ) They're Only Chasing Safety  " ]; 
+nodeAbril0 [label = "  (Abril , 0 ) FILA  " ]; 
+nodeAbril2018 [label = "  (Abril , 2018 ) Erase Me  " ]; 
 nodeMESES0 -> nodeMESES2004; 
 nodeMESES2004 -> nodeMESES2018; 
 nodeMESES2018 -> nodeMESES2004; 
 nodeMESES2004 -> nodeMESES0; 
 nodeJulio0 -> nodeJulio2004; 
 nodeJulio2004 -> nodeJulio0; 
+nodeAbril0 -> nodeAbril2018[constraint=false]; 
+nodeAbril2018 -> nodeAbril0[constraint=false]; 
+nodeMESES0 -> nodeJulio0; 
+nodeJulio0 -> nodeAbril0; 
+nodeAbril0 -> nodeJulio0; 
+nodeJulio0 -> nodeMESES0; 
+nodeMESES2004 -> nodeJulio2004; 
+nodeJulio2004 -> nodeMESES2004; 
+nodeMESES2018 -> nodeAbril2018; 
+nodeAbril2018 -> nodeMESES2018; 
 { rank = same;nodeMESES0 ;nodeMESES2004 ;nodeMESES2018 ;} 
 { rank = same;nodeJulio0 ;nodeJulio2004 ;} 
+{ rank = same;nodeAbril0 ;nodeAbril2018 ;} 
 }
