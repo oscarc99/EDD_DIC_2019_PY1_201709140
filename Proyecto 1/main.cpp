@@ -261,6 +261,7 @@ int main()
                     c++;
                     nodoLista= nodoLista->getNext();
                 }
+                //VAMOS BIEN
                 c=1;
                 cout << "Elija una cancion opcion:";
                 cin >> selecSong;
