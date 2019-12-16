@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1576266734 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\album.cpp
+1576479487 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\album.cpp
 	"Album.h"
 
-1576379602 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\album.h
+1576484936 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\album.h
 	<string>
 	"ListaSimple.h"
 	"Song.h"
@@ -34,7 +34,7 @@
 	<string>
 	"Cubo.h"
 
-1576477843 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\main.cpp
+1576486095 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\main.cpp
 	<iostream>
 	<fstream>
 	<string>
@@ -44,6 +44,7 @@
 	<cstdlib>
 	"Song.h"
 	"Artist.h"
+	"NodoC.h"
 	"Pila.h"
 	"Cola.h"
 	"Cubo.h"
@@ -60,7 +61,8 @@
 1575872165 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadoble.cpp
 	"ListaDoble.h"
 
-1576026929 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listasimple.cpp
+1576479694 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listasimple.cpp
+	"ListaSimple.h"
 
 1576468926 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\pila.cpp
 	"Pila.h"
@@ -83,7 +85,7 @@
 	"Song.h"
 	<string>
 
-1576462507 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cubo.cpp
+1576485928 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cubo.cpp
 	"Cubo.h"
 	<sstream>
 	<fstream>
@@ -91,7 +93,7 @@
 	<iostream>
 	"Album.h"
 
-1576291687 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cubo.h
+1576484936 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cubo.h
 	"Album.h"
 	"NodoC.h"
 
@@ -424,7 +426,8 @@
 
 1575197604 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\include\nlohmann\thirdparty\hedley\hedley_undef.hpp
 
-1576261566 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listasimple.h
+1576486898 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listasimple.h
+	"Song.h"
 
 1576136215 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\hoja.cpp
 	"hoja.h"

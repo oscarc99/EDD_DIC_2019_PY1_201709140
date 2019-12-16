@@ -18,6 +18,7 @@ class Cubo
         void insertAlbum(int X, string Y,Album* alb);
         void generarReporte(string name);
         bool isEmpty();
+        Album* getAlbum(int index);
 
 
 

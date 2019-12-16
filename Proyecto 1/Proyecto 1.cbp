@@ -55,6 +55,7 @@
 		<Unit filename="EDD/Cubo.cpp" />
 		<Unit filename="EDD/Cubo.h" />
 		<Unit filename="EDD/ListaDoble.h" />
+		<Unit filename="EDD/ListaSimple.cpp" />
 		<Unit filename="EDD/ListaSimple.h" />
 		<Unit filename="EDD/NodoC.cpp" />
 		<Unit filename="EDD/NodoC.h" />

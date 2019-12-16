@@ -211,15 +211,201 @@ void Cubo::insertAlbum(int X, string Y, Album* alb)
             aux = aux->getDerecha();
 
         }
-
-
-
     }
-
-
-
-
 }
+
+Album* Cubo::getAlbum(int index){
+    NodoC *cubo= this->getRoot();
+    while(cubo->getDerecha()!= 0)
+                {
+
+
+                    ///RECORRO MESES DEL AÑO
+                    while(cubo->getAdelante()!=0)
+                    {
+                        if(cubo->getAlbum()->getName().compare("root") == 0 ||  cubo->getAlbum()->getName().compare("FILA") == 0 || cubo->getAlbum()->getName().compare("MESES") == 0 )
+                        {
+
+                        }
+                        else
+                        {
+                            ///Debo recorrer en z si existe
+                            if(cubo->getArriba()!=0){
+                                while(cubo->getArriba()!=0){
+                                    if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+
+                                    cubo= cubo->getArriba();
+                                    if(cubo->getArriba()==0){
+                                        if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+                                    }
+                                }
+                                while(cubo->getAbajo()!= 0){
+                                    cubo = cubo->getAbajo();
+                                }
+
+                            }
+                            if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+
+                        }
+
+                        cubo=cubo->getAdelante();
+
+
+
+                        if(cubo->getAdelante()==0)
+                        {
+                            if(cubo->getAlbum()->getName().compare("root") == 0 ||  cubo->getAlbum()->getName().compare("FILA") == 0 || cubo->getAlbum()->getName().compare("MESES") == 0 )
+                            {
+
+                            }
+                            else
+                            {
+                            ///Debo recorrer en z si existe
+                            if(cubo->getArriba()!=0){
+                                while(cubo->getArriba()!=0){
+                                    if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+                                    cubo= cubo->getArriba();
+                                    if(cubo->getArriba()==0){
+                                        if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+                                    }
+                                }
+                                while(cubo->getAbajo()!= 0){
+                                    cubo = cubo->getAbajo();
+                                }
+
+                            }
+                            if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+
+                        }
+
+                        }
+
+
+                    }
+
+
+                    ///REGRESO
+                    while(cubo->getAtras()!=0)
+                    {
+                        cubo=cubo->getAtras();
+                    }
+                    cubo= cubo->getDerecha();
+                    if(cubo->getDerecha()==0){
+
+                        ///RECORRO MESES DEL AÑO
+                    while(cubo->getAdelante()!=0)
+                    {
+                        if(cubo->getAlbum()->getName().compare("root") == 0 ||  cubo->getAlbum()->getName().compare("FILA") == 0 || cubo->getAlbum()->getName().compare("MESES") == 0 )
+                        {
+
+                        }
+                        else
+                        {
+                            ///Debo recorrer en z si existe
+                            if(cubo->getArriba()!=0){
+                                while(cubo->getArriba()!=0){
+                                    if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+
+                                    cubo= cubo->getArriba();
+                                    if(cubo->getArriba()==0){
+                                        if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+                                    }
+                                }
+                                while(cubo->getAbajo()!= 0){
+                                    cubo = cubo->getAbajo();
+                                }
+
+                            }
+                            if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+
+                        }
+
+                        cubo=cubo->getAdelante();
+
+
+
+                        if(cubo->getAdelante()==0)
+                        {
+                            if(cubo->getAlbum()->getName().compare("root") == 0 ||  cubo->getAlbum()->getName().compare("FILA") == 0 || cubo->getAlbum()->getName().compare("MESES") == 0 )
+                            {
+
+                            }
+                            else
+                            {
+                            ///Debo recorrer en z si existe
+                            if(cubo->getArriba()!=0){
+                                while(cubo->getArriba()!=0){
+                                    if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+                                    cubo= cubo->getArriba();
+                                    if(cubo->getArriba()==0){
+                                        if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+                                    }
+                                }
+                                while(cubo->getAbajo()!= 0){
+                                    cubo = cubo->getAbajo();
+                                }
+
+                            }
+                            if(cubo->getAlbum()->getIndice()==index){
+                                        return cubo->getAlbum();
+                                    }
+
+                        }
+
+                        }
+
+
+                    }
+
+
+                    ///REGRESO
+                    while(cubo->getAtras()!=0)
+                    {
+                        cubo=cubo->getAtras();
+                    }
+
+
+
+
+
+
+                    }
+                }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 void Cubo::generarReporte(string nameArt)
 {

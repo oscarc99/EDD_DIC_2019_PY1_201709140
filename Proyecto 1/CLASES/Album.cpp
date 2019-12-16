@@ -6,7 +6,7 @@ Album::Album(string nombre, string mes, string anio){
             Year = anio;
 }
 
-Album::Album(string nombre, string mes, string anio, ListaSimple<Song*> *s){
+Album::Album(string nombre, string mes, string anio, ListaSimple *s){
             Name = nombre;
             Month = mes;
             Year = anio;

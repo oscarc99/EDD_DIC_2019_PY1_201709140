@@ -8,8 +8,9 @@
 
 //Estructuras
 #include "Song.h"
+#include "ListaSimple.h"
 #include "Artist.h"
-
+#include "NodoC.h"
 #include "Pila.h"
 #include "Cola.h"
 #include "Cubo.h"
@@ -68,7 +69,7 @@ int main()
                     string year = albums["Year"];
                     //cout << nameAlbum <<endl;
 
-                    ListaSimple<Song*> *can = new ListaSimple<Song*>();
+                    ListaSimple *can = new ListaSimple();
                     for (const auto& song : albums["Songs"])
                     {
                         ///ESTOY DENTRO DE canciones
@@ -103,21 +104,26 @@ int main()
         }
         reader.close();
 
-        //temp->getDato()->getDiscografia()->generarReporte(temp->getDato()->getName());
+        ListaSimple* albumS;
         bool bandera=false;
         char tecla;
         int c=1;
         int sA, sS;
         node* fart= artistas->getFirst();
         nodeS* fsong = canciones->getFirst();
-
+        //fart->getDato()->getDiscografia()->generarReporte(fart->getDato()->getName());
         //artistas->report();
         Artist* selectArt;
+        int indexAlb=0;
+        int selecSong;
         Song* selectSong;
-
+        NodoC * cubo;
+        Album* selectAlb;
+        NodoLS* nodoLista;
         do
         {
-
+            fart= artistas->getFirst();
+            fsong = canciones->getFirst();
             cin.clear();
             cout << "----------------------------------------------" << endl;
             cout << "----------------------------------------------" << endl;
@@ -140,22 +146,134 @@ int main()
                 cout <<"--------------NAVEGACION POR ARTISTA-------------"<<endl;
                 cout << "----------------------------------------------" << endl;
 
-                while (fart!=0){
+                while (fart!=0)
+                {
                     cout << c <<". " << fart->getDato()->getName()<<endl;
                     fart= fart->getNext();
                     c++;
                 }
                 c=1;
-                cout << "Elija una opcion:";
+                cout << "Elija un artista opcion:";
                 cin >> sA;
                 cout << "\n "<<endl;
 
                 selectArt=artistas->get_element_at(sA-1);
+                cubo = selectArt->getDiscografia()->getRoot();
+
+                ///RECORRO PRIMERO AÑOS
+                while(cubo!= 0)
+                {
+
+                    cout << "ALBUM DE AÑO: "<<cubo->getX() <<endl;
+                    ///RECORRO MESES DEL AÑO
+                    while(cubo->getAdelante()!=0)
+                    {
+                        if(cubo->getAlbum()->getName().compare("root") == 0 ||  cubo->getAlbum()->getName().compare("FILA") == 0 || cubo->getAlbum()->getName().compare("MESES") == 0 )
+                        {
+
+                        }
+                        else
+                        {
+                            ///Debo recorrer en z si existe
+                            if(cubo->getArriba()!=0){
+                                while(cubo->getArriba()!=0){
+                                    cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                                    cubo->getAlbum()->setIndice(c);
+                                        c++;
+                                    cubo= cubo->getArriba();
+                                    if(cubo->getArriba()==0){
+                                        cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                                        cubo->getAlbum()->setIndice(c);
+                                        c++;
+                                    }
+                                }
+                                while(cubo->getAbajo()!= 0){
+                                    cubo = cubo->getAbajo();
+                                }
+
+                            }
+                            cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                            cubo->getAlbum()->setIndice(c);
+                            c++;
+
+                        }
+
+                        cubo=cubo->getAdelante();
 
 
 
+                        if(cubo->getAdelante()==0)
+                        {
+                            if(cubo->getAlbum()->getName().compare("root") == 0 ||  cubo->getAlbum()->getName().compare("FILA") == 0 || cubo->getAlbum()->getName().compare("MESES") == 0 )
+                            {
+
+                            }
+                            else
+                            {
+                            ///Debo recorrer en z si existe
+                            if(cubo->getArriba()!=0){
+                                while(cubo->getArriba()!=0){
+                                    cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                                    cubo->getAlbum()->setIndice(c);
+                                        c++;
+                                    cubo= cubo->getArriba();
+                                    if(cubo->getArriba()==0){
+                                        cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                                        cubo->getAlbum()->setIndice(c);
+                                        c++;
+                                    }
+                                }
+                                while(cubo->getAbajo()!= 0){
+                                    cubo = cubo->getAbajo();
+                                }
+
+                            }
+                            cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                            cubo->getAlbum()->setIndice(c);
+                            c++;
+
+                        }
+
+                        }
 
 
+                    }
+
+
+                    ///REGRESO
+                    while(cubo->getAtras()!=0)
+                    {
+                        cubo=cubo->getAtras();
+                    }
+                    cubo= cubo->getDerecha();
+                }
+                cout << "Elija un album opcion:";
+                cin >> indexAlb;
+                selectAlb= selectArt->getDiscografia()->getAlbum(indexAlb);
+                albumS = selectAlb->getCanciones();
+                cout << "-" << endl;
+                cout <<"Seleccione cancion del album   "<< selectAlb->getName()<< endl;
+                cout <<" "<<  endl;
+                c=1;
+                nodoLista = albumS->getFirst();
+                while(nodoLista!=0){
+                    cout << c <<".  "<< nodoLista->getDato()->getName()<<endl;
+                    c++;
+                    nodoLista= nodoLista->getNext();
+                }
+                c=1;
+                cout << "Elija una cancion opcion:";
+                cin >> selecSong;
+                nodoLista = albumS->getFirst();
+                while(nodoLista!=0){
+                    if (selecSong == c){break;}
+                    c++;
+                    nodoLista= nodoLista->getNext();
+                }
+                c=1;
+                cout << "----------------------------"<<endl;
+                cout << "SELECCIONO"<<nodoLista->getDato()->getName()<< endl;
+                cout << "SELECCIONO"<<nodoLista->getDato()->getRanking()<< endl;
 
                 break;
 
@@ -164,7 +282,8 @@ int main()
                 cout << "NAVEGACION POR CANCION."<< endl;
                 cout << "--------------------------" << endl;
 
-                while (fsong!=0){
+                while (fsong!=0)
+                {
                     cout << c <<". " << fsong->getDato()->getName()<<endl;
                     c++;
                     fsong= fsong->getNext();
@@ -172,15 +291,15 @@ int main()
                 cout << " \n"<<endl;
                 cout << "Elija una opcion:";
                 cin >>sS;
-
+                cout << "---------" << endl;
                 cout <<"YOU SELECT :" <<endl;
                 selectSong= canciones->get_element_at(sS-1);
                 cout << selectSong->getName()<<endl;
                 cout << selectSong->getArtist()<<endl;
                 cout << selectSong->getAlbum()<<endl;
                 cout << selectSong->getRanking()<<endl;
-
-
+                cout << "---------" << endl;
+                c=1;
                 break;
 
             case '3':
