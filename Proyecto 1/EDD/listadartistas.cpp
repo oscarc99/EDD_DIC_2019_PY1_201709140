@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <string.h>
 
 
 ListaDArtistas::ListaDArtistas()
@@ -137,6 +138,32 @@ void ListaDArtistas::remove_at(int index)
     }
 }
 
+void ListaDArtistas::insertOrdenado(Artist* art ){
+            if(this->isEmpty()){
+            this->add_first(art); return;
+        }
+        int posicion = 0;
+        node *aux = this->getFirst();
+        while(aux!=0){
+            if(art->getName().compare(this->getFirst()->getDato()->getName()) == -1){
+                    posicion=0; break;
+            }
+            if(art->getName().compare(this->getLast()->getDato()->getName()) == 1){
+                    posicion=size; break;
+            }
+            if(art->getName().compare(aux->getDato()->getName()) == 1){
+                    posicion++;
+            }
+            if(art->getName().compare(aux->getNext()->getDato()->getName()) == -1){ break;}
+            aux = aux->getNext();
+        }
+        this->add_at(art, posicion);
+
+
+}
+
+
+
 void ListaDArtistas::report(){
      string nodo="";
     string dir="";
@@ -144,7 +171,7 @@ void ListaDArtistas::report(){
 
 
     node* temp = this->getFirst();
-    node* begi= this->getFirst();
+
 
 
     ofstream archivo;
@@ -183,7 +210,7 @@ void ListaDArtistas::report(){
 
 
         archivo.close();
-        string crear = "neato -Tpng report\\artistas.dot -o report\\artistas.png";
+        string crear = "dot.exe -Tpng report\\artistas.dot -o report\\artistas.png";
         system(crear.c_str());
         ifstream image;
         image.open("report\\artistas.png");

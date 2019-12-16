@@ -25,19 +25,20 @@ public:
 class ListaDArtistas
 {
     public:
-            ListaDArtistas();
+        ListaDArtistas();
         node* getFirst(){return first;}
         node* getLast(){return last;}
-         int getSize(){return size;}
-         void add_first(Artist* dato);
-         void add_last(Artist* dato);
-         void add_at(Artist* dato, int index);
-         Artist* get_element_at(int index);
-         void remove_at(int index);
-         bool isEmpty(){return size == 0;}
-         virtual ~ListaDArtistas();
+        int getSize(){return size;}
+        void add_first(Artist* dato);
+        void add_last(Artist* dato);
+        void add_at(Artist* dato, int index);
+        Artist* get_element_at(int index);
+        void remove_at(int index);
+        bool isEmpty(){return size == 0;}
+        virtual ~ListaDArtistas();
+        void insertOrdenado(Artist* a);
+        void report();
 
-         void report();
 
     private:
         node* first;

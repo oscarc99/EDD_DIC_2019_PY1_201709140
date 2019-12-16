@@ -69,6 +69,8 @@
 		<Unit filename="EDD/listadartistas.cpp" />
 		<Unit filename="EDD/listadartistas.h" />
 		<Unit filename="EDD/listadoblecircular.h" />
+		<Unit filename="EDD/listadsongs.cpp" />
+		<Unit filename="EDD/listadsongs.h" />
 		<Unit filename="json.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>

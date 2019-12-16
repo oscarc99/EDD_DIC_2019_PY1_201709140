@@ -15,11 +15,11 @@ class Playlist
         string getName(){return nombre;}
         string getType(){return type;}
 
-        Pila<Song*>* getPila(){return pil;}
-        void setPila(Pila<Song*>* stacks){pil = stacks;}
+        Pila* getPila(){return pil;}
+        void setPila(Pila* stacks){pil = stacks;}
 
-        Cola<Song*>* getCola(){return col;}
-        void setCola(Cola<Song*>* queues){col = queues;}
+        Cola* getCola(){return col;}
+        void setCola(Cola* queues){col = queues;}
 
         ListaDoble<Song*>* getListaDoble(){return doble;}
         void setLDoble(ListaDoble<Song*>* dobl){doble = dobl;}
@@ -31,8 +31,8 @@ class Playlist
     private:
         string nombre;
         string type;
-        Pila<Song*>* pil;
-        Cola<Song*>* col;
+        Pila* pil;
+        Cola* col;
         ListaDoble<Song*>* doble ;
         ListaDobleCicular<Song*>* circular;
 

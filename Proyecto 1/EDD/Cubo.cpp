@@ -157,7 +157,7 @@ void Cubo::insertAlbum(int X, string Y, Album* alb)
 {
 
 
-
+    bool z;
     NodoC *nuevo = new  NodoC(X, Y, alb);
     NodoC *NodoColumna = buscarColumna(X);
     NodoC *NodoFila = buscarFila(Y);
@@ -187,8 +187,32 @@ void Cubo::insertAlbum(int X, string Y, Album* alb)
     }///Colimna y fila existe
     else
     {
-        nuevo = this->insertColumna(nuevo,NodoFila);
-        nuevo = this->insertFila(nuevo,NodoColumna);
+        NodoC* aux = NodoFila;
+        while(aux!= 0)
+        {
+            if (aux->getX() == X)
+            {
+                if(aux==0)
+                {
+                    nuevo = this->insertColumna(nuevo,NodoFila);
+                    nuevo = this->insertFila(nuevo,NodoColumna);
+                }
+                else
+                {
+                    //busqueddad en z
+                    while(aux->getArriba()!=0)
+                    {
+                        aux=aux->getArriba();
+                    }
+                    aux->setArriba(nuevo);
+                    nuevo->setAbajo(aux);
+                }
+            }
+            aux = aux->getDerecha();
+
+        }
+
+
 
     }
 
@@ -220,27 +244,136 @@ void Cubo::generarReporte(string nameArt)
 
 
     ///RECORRIDO POR FILA
+    int altura =0;
+    //for(0 < 3) era 2
     while (Head->getAdelante() != 0)
+
     {
+
+
 
         alinea = alinea + "{ rank = same;";
         ///recorro de ia la fila selecionada
         while(Head->getDerecha() != 0)
         {
+
+
+            while(Head->getArriba()!=0)
+            {
+                altura++;
+                ///DEBO agregar nodo y dir;
+                if(altura=1)
+                {
+                    nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                }
+                else
+                {
+                    nodo = nodo + "node"+to_string(altura)+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+
+                }
+
+
+                Head= Head->getArriba();
+
+                if(Head->getArriba()==0)
+                {
+
+                    nodo = nodo + "node"+to_string(altura)+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                }
+
+
+            }
+            if(altura >0)
+            {
+                dir = dir + "node"+Head->getY()+to_string(Head->getX()) +"-> node1"+Head->getY()+to_string(Head->getX()) +"[dir = both]; \n";
+                for(int i = 1; i<altura ; i++)
+                {
+                    if(i != (altura-1) )
+                    {
+                        dir = dir + "node"+to_string(i)+Head->getY()+to_string(Head->getX()) +"-> node"+to_string(i+1)+Head->getY()+to_string(Head->getX()) +"[dir = both]; \n";
+                    }
+
+
+
+
+                }
+            }
+            while(Head->getAbajo()!=0)
+            {
+                ///regresando
+
+                Head= Head->getAbajo();
+                altura--;
+            }
+
+
+
+
+
             ///creando nodo
             nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+
             ///lista alineados
             alinea = alinea+  "node"+Head->getY()+to_string(Head->getX())+" ;";
 
             ///direccion de los apuntadores
             if (Head->getDerecha() != 0)
             {
+
                 dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getDerecha()->getY()+""+to_string(Head->getDerecha()->getX())+ "; \n";
             }
 
             Head = Head->getDerecha();
             if(Head->getDerecha()==0)
             {
+
+                while(Head->getArriba()!=0)
+            {
+                altura++;
+                ///DEBO agregar nodo y dir;
+                if(altura=1)
+                {
+                    nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                }
+                else
+                {
+                    nodo = nodo + "node"+to_string(altura)+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+
+                }
+
+
+                Head= Head->getArriba();
+
+                if(Head->getArriba()==0)
+                {
+
+                    nodo = nodo + "node"+to_string(altura)+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                }
+
+
+            }
+            if(altura >0)
+            {
+                dir = dir + "node"+Head->getY()+to_string(Head->getX()) +"-> node1"+Head->getY()+to_string(Head->getX()) +"[dir = both]; \n";
+                for(int i = 1; i<altura ; i++)
+                {
+                    if(i != (altura-1) )
+                    {
+                        dir = dir + "node"+to_string(i)+Head->getY()+to_string(Head->getX()) +"-> node"+to_string(i+1)+Head->getY()+to_string(Head->getX()) +"[dir = both]; \n";
+                    }
+
+
+
+
+                }
+            }
+            while(Head->getAbajo()!=0)
+            {
+                ///regresando
+
+                Head= Head->getAbajo();
+                altura--;
+            }
                 ///creando nodo
                 nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
                 ///lista alineados
@@ -270,6 +403,54 @@ void Cubo::generarReporte(string nameArt)
             ///recorro de ia la fila selecionada
             while(Head->getDerecha() != 0)
             {
+
+                while(Head->getArriba()!=0)
+            {
+                altura++;
+                ///DEBO agregar nodo y dir;
+                if(altura=1)
+                {
+                    nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                }
+                else
+                {
+                    nodo = nodo + "node"+to_string(altura)+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+
+                }
+
+
+                Head= Head->getArriba();
+
+                if(Head->getArriba()==0)
+                {
+
+                    nodo = nodo + "node"+to_string(altura)+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                }
+
+
+            }
+            if(altura >0)
+            {
+                dir = dir + "node"+Head->getY()+to_string(Head->getX()) +"-> node1"+Head->getY()+to_string(Head->getX()) +"[dir = both]; \n";
+                for(int i = 1; i<altura ; i++)
+                {
+                    if(i != (altura-1) )
+                    {
+                        dir = dir + "node"+to_string(i)+Head->getY()+to_string(Head->getX()) +"-> node"+to_string(i+1)+Head->getY()+to_string(Head->getX()) +"[dir = both]; \n";
+                    }
+
+
+
+
+                }
+            }
+            while(Head->getAbajo()!=0)
+            {
+                ///regresando
+
+                Head= Head->getAbajo();
+                altura--;
+            }
                 ///creando nodo
                 nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
                 ///lista alineados
@@ -284,6 +465,53 @@ void Cubo::generarReporte(string nameArt)
                 Head = Head->getDerecha();
                 if(Head->getDerecha()==0)
                 {
+                    while(Head->getArriba()!=0)
+            {
+                altura++;
+                ///DEBO agregar nodo y dir;
+                if(altura=1)
+                {
+                    nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                }
+                else
+                {
+                    nodo = nodo + "node"+to_string(altura)+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+
+                }
+
+
+                Head= Head->getArriba();
+
+                if(Head->getArriba()==0)
+                {
+
+                    nodo = nodo + "node"+to_string(altura)+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
+                }
+
+
+            }
+            if(altura >0)
+            {
+                dir = dir + "node"+Head->getY()+to_string(Head->getX()) +"-> node1"+Head->getY()+to_string(Head->getX()) +"[dir = both]; \n";
+                for(int i = 1; i<altura ; i++)
+                {
+                    if(i != (altura-1) )
+                    {
+                        dir = dir + "node"+to_string(i)+Head->getY()+to_string(Head->getX()) +"-> node"+to_string(i+1)+Head->getY()+to_string(Head->getX()) +"[dir = both]; \n";
+                    }
+
+
+
+
+                }
+            }
+            while(Head->getAbajo()!=0)
+            {
+                ///regresando
+
+                Head= Head->getAbajo();
+                altura--;
+            }
                     ///creando nodo
                     nodo = nodo + "node"+Head->getY()+to_string(Head->getX())+ " [label = \"  ("+Head->getY()+" , "+to_string(Head->getX())+" ) "+ Head->getAlbum()->getName()+"  \" ]; \n";
                     ///lista alineados
@@ -332,19 +560,19 @@ void Cubo::generarReporte(string nameArt)
         if(Head->getDerecha()==0)
         {
             while (Head->getAdelante()!= 0)
-        {
+            {
 
-            dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAdelante()->getY()+""+to_string(Head->getAdelante()->getX())+ "; \n";
+                dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAdelante()->getY()+""+to_string(Head->getAdelante()->getX())+ "; \n";
 
-            Head = Head->getAdelante();
+                Head = Head->getAdelante();
 
-        }
-        while (Head->getAtras()!= 0)
-        {
+            }
+            while (Head->getAtras()!= 0)
+            {
 
-            dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAtras()->getY()+""+to_string(Head->getAtras()->getX())+ "; \n";
-            Head= Head->getAtras();
-        }
+                dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAtras()->getY()+""+to_string(Head->getAtras()->getX())+ "; \n";
+                Head= Head->getAtras();
+            }
 
         }
 
@@ -352,6 +580,13 @@ void Cubo::generarReporte(string nameArt)
 
 
     }
+
+
+    Head = this->getRoot();
+    ///Creo y apunto en z
+
+
+
 
     ///Agregamos strings´s a archivos y lo generamos
     archivo << nodo;

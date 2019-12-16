@@ -3,18 +3,20 @@
 #include <string>
 #include "json.hpp"
 #include <sstream>
-
+#include <iostream>
+#include <cstdlib>
 
 //Estructuras
 #include "Song.h"
 #include "Artist.h"
-#include "ListaDoble.h"
+
 #include "Pila.h"
 #include "Cola.h"
 #include "Cubo.h"
 #include "Album.h"
 #include "listadartistas.h"
 #include "arbolbin.h"
+#include "listadsongs.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -22,137 +24,204 @@ using json = nlohmann::json;
 
 ListaDArtistas *artistas;
 ArbolBin *reproduccion;
-
+ListaDSongs *canciones;
 int main()
 {
     ///asigna estructuras a sus punteros
     artistas = new ListaDArtistas();
     reproduccion = new ArbolBin();
-    ListaSimple<Song*> *canciones = new ListaSimple<Song*>();
+    canciones = new ListaDSongs();
     const string fileLibrary = "Library.json";
     ifstream reader(fileLibrary);
     json j;
     reader >> j;
     ///lectura de libreria automaticamente al inciar
-    if (reader.fail()){
-
-            cout<<"No existe el archivo necesario para el funcionamiento" << endl;
-            cout <<"AGREGE ARCHIVO 'Library.json'" << endl;
-    }else{
-
-
-
-
-    for (const auto& libr : j)
+    if (reader.fail())
     {
-        ///ESTOY DENTRO DE LA LIBRERIA
-        for (const auto& Art : libr)
+
+        cout<<"No existe el archivo necesario para el funcionamiento" << endl;
+        cout <<"AGREGE ARCHIVO 'Library.json'" << endl;
+    }
+    else
+    {
+
+
+
+
+        for (const auto& libr : j)
         {
-            cout << "----------------------------" << endl;
-            cout << "      ------- ARTISTA  ------" << endl;
-            ///ESTOY DENTRO DE LA artista
-            string nameArtist = Art["Artist"]["Name"];
-            Cubo *disc = new Cubo();
-
-
-
-            ///Lleno cubp con los albums
-            for (const auto& albums : Art["Artist"]["Albums"])
+            ///ESTOY DENTRO DE LA LIBRERIA
+            for (const auto& Art : libr)
             {
-                ///ESTOY DENTRO DE LA albums
-                cout << "      -------           ALBUM   ------" << endl;
-                string nameAlbum = albums["Name"];
-                string mes = albums ["Month"];
-                string year = albums["Year"];
-                cout << nameAlbum <<endl;
-
-                ListaSimple<Song*> *can = new ListaSimple<Song*>();
-                for (const auto& song : albums["Songs"])
+                //cout << "----------------------------" << endl;
+                //cout << "      ------- ARTISTA  ------" << endl;
+                ///ESTOY DENTRO DE LA artista
+                string nameArtist = Art["Artist"]["Name"];
+                Cubo *disc = new Cubo();
+                ///Lleno cubp con los albums
+                for (const auto& albums : Art["Artist"]["Albums"])
                 {
-                    ///ESTOY DENTRO DE canciones
-                    cout << "      -------                            CANCIONES  ------" << endl;
-                    string nameSong = song["Name"];
-                    string rating = song["Rating"];
-                    double r = atof(rating.c_str());;
-                    ///cancion para lista de canciones global
+                    ///ESTOY DENTRO DE LA albums
+                    //cout << "      -------           ALBUM   ------" << endl;
+                    string nameAlbum = albums["Name"];
+                    string mes = albums ["Month"];
+                    string year = albums["Year"];
+                    //cout << nameAlbum <<endl;
 
+                    ListaSimple<Song*> *can = new ListaSimple<Song*>();
+                    for (const auto& song : albums["Songs"])
+                    {
+                        ///ESTOY DENTRO DE canciones
+                        //cout << "      -------                            CANCIONES  ------" << endl;
+                        string nameSong = song["Name"];
+                        string rating = song["Rating"];
+                        double r = atof(rating.c_str());;
 
+                        ///cancion para lista de canciones global
+                        Song *ss = new Song(nameSong,r,year,mes,nameAlbum, nameArtist);
+                        canciones->insertOrdenado(ss);
 
-                    Song *ss = new Song(nameSong,r,year,mes,nameAlbum, nameArtist);
-                    canciones->add_last(ss);
+                        /// cancion para el ambum del cubo del artista
+                        Song *s = new Song(nameSong, r);
+                        can->add_first(s);
+                        //cout << nameSong <<  endl;
+                    }
 
-                    /// cancion para el ambum del cubo del artista
-                    Song *s = new Song(nameSong, r);
-                    can->add_first(s);
+                    Album *al = new Album(nameAlbum,mes,year,can);
+                    ///---------converit año a int..............................------------
+                    ///ARREGLAR
+                    int ye=0;
 
-
-                    cout << nameSong <<  endl;
-
-
+                    std::istringstream(year) >> ye;
+                    disc->insertAlbum(ye, mes, al);
                 }
 
-                Album *al = new Album(nameAlbum,mes,year,can);
-                ///---------converit año a int..............................------------
-                ///ARREGLAR
-                int ye=0;
-
-                std::istringstream(year) >> ye;
-                disc->insertAlbum(ye, mes, al);
-
-
+                ///Luego de llenado ingresa
+                Artist *a = new Artist(nameArtist,disc);
+                artistas->insertOrdenado(a);
             }
-
-            ///Luego de llenado ingresa
-            Artist *a = new Artist(nameArtist,disc);
-
-
-
-
-            artistas->add_last(a);
-
-
         }
+        reader.close();
+
+        //temp->getDato()->getDiscografia()->generarReporte(temp->getDato()->getName());
+        bool bandera=false;
+        char tecla;
+        int c=1;
+        int sA, sS;
+        node* fart= artistas->getFirst();
+        nodeS* fsong = canciones->getFirst();
+
+        //artistas->report();
+        Artist* selectArt;
+        Song* selectSong;
+
+        do
+        {
+
+            cin.clear();
+            cout << "----------------------------------------------" << endl;
+            cout << "----------------------------------------------" << endl;
+            cout << "---------------MENU PRINCIPAL----------------" << endl;
+            cout << "----------------------------------------------" << endl;
+            cout << "----------------------------------------------" << endl << endl;
+            cout << "\t1 .- Visualizar Artistas" << endl;
+            cout << "\t2 .- Visualizar Canciones" << endl;
+            cout << "\t3 .- Ver Playlist" << endl;
+            cout << "\t4 .- Importar Playlist" << endl;
+            cout << "\t5 .- Estadisticas" << endl;
+            cout << "\t6 .- Salir" << endl << endl;
+            cout << "Elije una opcion: ";
+
+            cin >> tecla;
+
+            switch(tecla)
+            {
+            case '1':
+                cout <<"--------------NAVEGACION POR ARTISTA-------------"<<endl;
+                cout << "----------------------------------------------" << endl;
+
+                while (fart!=0){
+                    cout << c <<". " << fart->getDato()->getName()<<endl;
+                    fart= fart->getNext();
+                    c++;
+                }
+                c=1;
+                cout << "Elija una opcion:";
+                cin >> sA;
+                cout << "\n "<<endl;
+
+                selectArt=artistas->get_element_at(sA-1);
+
+
+
+
+
+
+                break;
+
+            case '2':
+                cout <<"---------------------------"<<endl;
+                cout << "NAVEGACION POR CANCION."<< endl;
+                cout << "--------------------------" << endl;
+
+                while (fsong!=0){
+                    cout << c <<". " << fsong->getDato()->getName()<<endl;
+                    c++;
+                    fsong= fsong->getNext();
+                }
+                cout << " \n"<<endl;
+                cout << "Elija una opcion:";
+                cin >>sS;
+
+                cout <<"YOU SELECT :" <<endl;
+                selectSong= canciones->get_element_at(sS-1);
+                cout << selectSong->getName()<<endl;
+                cout << selectSong->getArtist()<<endl;
+                cout << selectSong->getAlbum()<<endl;
+                cout << selectSong->getRanking()<<endl;
+
+
+                break;
+
+            case '3':
+                system("cls");
+                cout << "Has elejido Multiplicar.\n";
+
+                break;
+
+            case '4':
+                system("cls");
+                cout << "Has elejido Dividir.\n";
+
+                break;
+
+            case '5':
+                bandera=true;
+                exit(1);
+                break;
+            case '6':
+                bandera=true;
+                exit(1);
+                break;
+            default:
+
+                cout << "Opcion no valida.\a\n";
+
+                break;
+            }
+        }
+        while(bandera!=true);
+
+
+
+
+
+
     }
-    reader.close();
-    node* temp = artistas->getFirst();
-    temp->getDato()->getDiscografia()->generarReporte(temp->getDato()->getName());
-
-    /*
-    cout << temp->getDato()->getDiscografia()->getRoot()->getAlbum()->getName() << endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getX()<< endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getY() << endl;
-*/
-/*
-    cout << temp->getDato()->getDiscografia()->getRoot()->getAdelante()->getAlbum()->getName() << endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getAdelante()->getX()<< endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getAdelante()->getY() << endl;
-
-    cout << temp->getDato()->getDiscografia()->getRoot()->getAdelante()->getAdelante()->getAlbum()->getName() << endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getAdelante()->getAdelante()->getX()<< endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getAdelante()->getAdelante()->getY() << endl;
-
-    */
-
-    /*
-    cout << temp->getDato()->getDiscografia()->getRoot()->getDerecha()->getAlbum()->getName() << endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getDerecha()->getX()<< endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getDerecha()->getY() << endl;
-
-    cout << temp->getDato()->getDiscografia()->getRoot()->getDerecha()->getDerecha()->getAlbum()->getName() << endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getDerecha()->getDerecha()->getX()<< endl;
-    cout << temp->getDato()->getDiscografia()->getRoot()->getDerecha()->getDerecha()->getY() << endl;
-
-*/
 
 
 
 
-    //artistas->report();
-
-
-
-
-    }
 
 
 
@@ -186,6 +255,12 @@ void agrgarPlaylist(string fileJson)
     }
     reader.close();
 
+}
+void pausa()
+{
+    cout << "Pulsa una tecla para continuar...";
+    getwchar();
+    getwchar();
 }
 
 

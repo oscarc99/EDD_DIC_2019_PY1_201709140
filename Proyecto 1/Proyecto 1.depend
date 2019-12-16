@@ -13,10 +13,10 @@
 1575866579 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\artista.h
 	<string>
 
-1576260729 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\song.cpp
+1576475447 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\song.cpp
 	"Song.h"
 
-1576260251 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\song.h
+1576475447 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\song.h
 	<string>
 
 1575868028 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\artista.cpp
@@ -34,21 +34,23 @@
 	<string>
 	"Cubo.h"
 
-1576397599 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\main.cpp
+1576477843 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\main.cpp
 	<iostream>
 	<fstream>
 	<string>
 	"json.hpp"
 	<sstream>
+	<iostream>
+	<cstdlib>
 	"Song.h"
 	"Artist.h"
-	"ListaDoble.h"
 	"Pila.h"
 	"Cola.h"
 	"Cubo.h"
 	"Album.h"
 	"listadartistas.h"
 	"arbolbin.h"
+	"listadsongs.h"
 
 1576379645 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadoble.h
 	<string>
@@ -60,9 +62,11 @@
 
 1576026929 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listasimple.cpp
 
-1576033748 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\pila.cpp
+1576468926 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\pila.cpp
+	"Pila.h"
 
-1576035824 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cola.cpp
+1576467849 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cola.cpp
+	"Cola.h"
 
 1576116612 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\nodoc.cpp
 	"NodoC.h"
@@ -71,13 +75,15 @@
 	"Album.h"
 	<string>
 
-1576131206 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\pila.h
+1576468926 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\pila.h
+	<string>
+	"Song.h"
+
+1576467792 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cola.h
+	"Song.h"
 	<string>
 
-1576132443 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cola.h
-	<string>
-
-1576433468 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cubo.cpp
+1576462507 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cubo.cpp
 	"Cubo.h"
 	<sstream>
 	<fstream>
@@ -434,7 +440,7 @@
 1576127101 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\playlist.cpp
 	"Playlist.h"
 
-1576134772 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\playlist.h
+1576468949 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\playlist.h
 	"Pila.h"
 	"Cola.h"
 	"ListaDoble.h"
@@ -449,18 +455,30 @@
 	"hoja.h"
 	<string>
 
-1576377533 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadartistas.cpp
+1576473970 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadartistas.cpp
 	"listadartistas.h"
 	<sstream>
 	<fstream>
 	<string>
 	<iostream>
+	<string.h>
 
-1576371931 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadartistas.h
+1576473962 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadartistas.h
 	"Artist.h"
 
 1576381658 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\discografy.cpp
 	"discografy.h"
 
 1576383225 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\discografy.h
+
+1576475468 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadsongs.cpp
+	"listadsongs.h"
+	<sstream>
+	<fstream>
+	<string>
+	<iostream>
+	<string.h>
+
+1576471683 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadsongs.h
+	"Song.h"
 

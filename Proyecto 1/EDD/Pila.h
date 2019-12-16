@@ -1,101 +1,58 @@
 #ifndef PILA_H
 #define PILA_H
 #include <string>
+#include "Song.h"
 
 using namespace std;
 
-template<class T>
-class Pila
-{
-    class Nodo
+    class NodoP
     {
         public:
-        Nodo(T x)
+        NodoP(Song* x)
         {
             dato =x;
             next = 0;
         }
-        void setNext(Nodo *n)
+        void setNext(NodoP *n)
         {
             next = n;
         }
 
-        Nodo *getNext()
+        NodoP *getNext()
         {
             return next;
         }
 
-        T getDato()
+        Song* getDato()
         {
             return dato;
         }
         private:
-            Nodo *next;
-            T dato;
+            NodoP *next;
+            Song* dato;
 
 
 
     };
+
+class Pila
+{
     public:
-        Pila<T>(){
+        Pila(){
             cima=0;
             size=0;
         }
         bool estaVacia();
-        void push(T dato);
-        T pop();
-        T peek();
+        void push(Song* dato);
+        Song* pop();
+        Song* peek();
 
 
     private:
-        Nodo *cima;
+        NodoP *cima;
         int size;
 };
 
-template<class T>
-bool Pila<T>::estaVacia(){
-    return this->size==0;
-}
 
-template<class T>
-void Pila<T>::push(T dato)
-{
-    Nodo *n = new Nodo(dato);
-    if(estaVacia())
-    {
-        this->cima=n;
-        this-> size++;
-    }else{
-        n->setNext(this->cima);
-        this->cima=n;
-        this->size++;
-    }
-}
-
-template<class T>
-T Pila<T>::pop()
-{
-    if(estaVacia()){
-
-       return 0;
-    }else{
-
-   T aux = this->cima->getDato();
-   this->cima = this->cima->getNext();
-   this->size--;
-   return aux;
-   }
-}
-
-template<class T>
-T Pila<T>::peek()
-{
-    if(estaVacia()){
-
-       return 0;
-    }else{
-    return this->cima->getDato();
-   }
-}
 
 #endif // PILA_H
