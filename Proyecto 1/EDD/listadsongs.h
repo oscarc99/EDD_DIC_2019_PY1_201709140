@@ -38,7 +38,8 @@ class ListaDSongs
         bool isEmpty(){return size == 0;}
         bool existSong(string name, string albu, string years, string mes, string artista);
         void insertOrdenado(Song* a);
-        void report();
+        void report(nodeS* pintar);
+        void report(string name);
         ListaDSongs();
         virtual ~ListaDSongs();
 

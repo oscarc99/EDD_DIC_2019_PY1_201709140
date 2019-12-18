@@ -1,0 +1,4 @@
+digraph G { 
+node [shape = record];
+2[label= " quiero | Te | Carmen " ] 
+}

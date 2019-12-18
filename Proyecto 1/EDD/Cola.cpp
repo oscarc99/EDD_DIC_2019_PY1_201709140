@@ -1,10 +1,72 @@
 #include "Cola.h"
+#include <fstream>
+#include <string>
 
-
-bool Cola::estaVaciaC(){
+bool Cola::estaVaciaC()
+{
     return this->size==0;
 }
 
+void Cola::report(string name)
+{
+
+    string nodo="";
+    string dir="";
+
+
+
+    Nodo* temp = this->getFirst();
+
+
+
+    ofstream archivo;
+
+    if (this->estaVaciaC())
+    {
+
+    }
+    else
+    {
+        ///Inicio archivo .dot
+        archivo.open("report\\"+name+".dot", ios::out);
+        archivo << "digraph R { \n";
+        archivo << "rankdir = RL;";
+        archivo << "node [shape=rectangle, height=0.5, width=0.5];\n";
+        archivo << "graph[ nodesep = 0.5];\n";
+        int c= 0;
+        while (temp!= 0)
+        {
+
+            nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ];\n";
+            if(temp->getNext()!=0)
+            {
+
+                dir = dir + " node"+to_string(c)+ " -> ";
+            }
+            else
+            {
+
+                dir = dir + "node"+to_string(c)+" [dir=back];";
+            }
+            c++;
+            temp = temp->getNext();
+        }
+
+        archivo << nodo;
+        archivo << dir;
+
+        archivo <<"}";
+
+
+        archivo.close();
+        string crear = "dot.exe -Tpng report\\"+name+".dot -o report\\"+name+".png";
+        system(crear.c_str());
+        string s="report\\"+name+".png" ;
+        system(s.c_str());
+    }
+
+
+}
 
 void Cola::enqueque(Song* dato)
 {
@@ -14,7 +76,9 @@ void Cola::enqueque(Song* dato)
         this->inicio=n;
         this->fin=n;
         this-> size++;
-    }else{
+    }
+    else
+    {
         fin->setNext(n);
         this->fin=n;
         this->size++;
@@ -24,27 +88,33 @@ void Cola::enqueque(Song* dato)
 
 Song* Cola::dequeque()
 {
-    if(this->estaVaciaC()){
+    if(this->estaVaciaC())
+    {
 
-       return 0;
-    }else{
+        return 0;
+    }
+    else
+    {
 
-   Song* aux = this->inicio->getDato();
-   this->inicio = this->inicio->getNext();
-   this->size--;
-   return aux;
-   }
+        Song* aux = this->inicio->getDato();
+        this->inicio = this->inicio->getNext();
+        this->size--;
+        return aux;
+    }
 }
 
 
 Song* Cola::peek()
 {
-    if(estaVaciaC()){
+    if(estaVaciaC())
+    {
 
-       return 0;
-    }else{
-     return this->inicio->getDato();
-   }
+        return 0;
+    }
+    else
+    {
+        return this->inicio->getDato();
+    }
 
 }
 

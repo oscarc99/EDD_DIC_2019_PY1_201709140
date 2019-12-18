@@ -8,6 +8,7 @@
 #include <vector>///UTILIZADO PARA EL SPLIT
 #include <stdio.h>
 #include <cstdlib>
+#include<windows.h>
 
 
 //Estructuras
@@ -37,6 +38,8 @@ ListaDSongs *canciones;
 
 int main()
 {
+
+    NodoP* nodoPila;
 
     ///asigna estructuras a sus punteros
     artistas = new ListaDArtistas();
@@ -117,6 +120,7 @@ int main()
         ListaSimple* albumS;
         bool bandera=false;
         char tecla;
+        char ld;
         int c=1;
         int sA, sS;
         node* fart= artistas->getFirst();
@@ -133,7 +137,14 @@ int main()
         string play;
         Hoja* selectPlay;
         string namePlayS;
+        ///Temporales
+        Playlist* playlistT;
+        Cola* colaT;
+        ListaDSongs* dobleT ;
+        ListaDobleCicular* circularT;
+        Pila* pilaT;
 
+        nodeS *nodoDoble;
         string namePlayList;
         string split ="_";
         string split2 =".";
@@ -148,10 +159,12 @@ int main()
         int r=0;
         ListaDSongs* shuffle;
         ListaDobleCicular * circular;
+
+        NodoDC* nodoCirculo;
         ///vectores para split de name playlist
         std::vector<std::string> arr;
         std::vector<std::string> name;
-
+        bool ayuda = true;
 
         do
         {
@@ -357,11 +370,134 @@ int main()
                 selectPlay = arbol->buscar(namePlayS);
                 if (selectPlay!= 0)
                 {
+                    ///Reprodusco
                     cout << "" << endl;
                     cout << "Usted selecciono" << endl;
                     cout << selectPlay->getPlay()->getName() << endl;
                     cout << selectPlay->getPlay()->getType() << endl;
-                    arbol->report();
+
+
+
+                    if(selectPlay->getPlay()->getType().compare("Stack")==0)
+                    {
+                        while (selectPlay->getPlay()->getPila()->getSize() != 0)
+                        {
+                            selectPlay->getPlay()->getPila()->report(selectPlay->getPlay()->getName() );
+                            selectPlay->getPlay()->getPila()->pop();
+                            Sleep(3000);
+                        }
+                    }
+                    else if(selectPlay->getPlay()->getType().compare("Queue")==0)
+                    {
+                        colaT = selectPlay->getPlay()->getCola();
+                        while (selectPlay->getPlay()->getCola()->getSize() != 0)
+                        {
+                            selectPlay->getPlay()->getCola()->report(selectPlay->getPlay()->getName() );
+                            selectPlay->getPlay()->getCola()->dequeque();
+                            Sleep(3000);
+                        }
+
+
+
+                    }
+                    else if(selectPlay->getPlay()->getType().compare("Shuffle")==0)
+                    {
+                        cout << selectPlay->getPlay()->getListaDoble()->getSize() << endl;
+                        dobleT = selectPlay->getPlay()->getListaDoble();
+
+                        nodoDoble = selectPlay->getPlay()->getListaDoble()->getFirst();
+                        selectPlay->getPlay()->getListaDoble()->report(nodoDoble);
+                        while(ayuda){
+                            cout << "\t1 .- Reproducir Siguiente" << endl;
+                            cout << "\t2 .- Reproducir Anterior" << endl;
+                            cout << "\t3 .- Stop playlist" << endl;
+                            cin >> ld;
+                            switch(ld)
+                            {
+                            case '1':
+                                if(nodoDoble->getNext()==0){
+                                    ayuda =false;
+                                    break;
+                                }else{
+                                    nodoDoble = nodoDoble->getNext();
+                                    selectPlay->getPlay()->getListaDoble()->report(nodoDoble->getDato()->getName());
+                                }
+
+                                break;
+                            case '2':
+                                 if(nodoDoble->getBefore()==0){
+                                    ayuda=false;
+                                    break;
+                                }else{
+                                    nodoDoble = nodoDoble->getBefore();
+                                    selectPlay->getPlay()->getListaDoble()->report(nodoDoble->getDato()->getName());
+                                }
+
+                                break;
+                            case '3':
+                                ayuda = false;
+                                break;
+
+                            default:
+
+                                cout << "Opcion no valida.\a\n";
+
+                                break;
+                            }
+                        }
+
+                    cout << "Se termino la lista de reproduccion" << endl;
+
+
+
+
+                    }
+                    else if(selectPlay->getPlay()->getType().compare("Circular")==0)
+                    {
+                        circularT = selectPlay->getPlay()->getCircular();
+                        nodoCirculo= selectPlay->getPlay()->getCircular()->getFirst();
+                        selectPlay->getPlay()->getCircular()->report(nodoCirculo);
+                        while(ayuda){
+                            cout << "\t1 .- Reproducir Siguiente" << endl;
+                            cout << "\t2 .- Reproducir Anterior" << endl;
+                            cout << "\t3 .- Stop playlist" << endl;
+                            cin >> ld;
+                            switch(ld)
+                            {
+                            case '1':
+
+                                    nodoCirculo = nodoCirculo->getNext();
+                                    selectPlay->getPlay()->getCircular()->report(nodoCirculo);
+
+
+                                break;
+                            case '2':
+
+                                    nodoCirculo= nodoCirculo->getBefore();
+                                    selectPlay->getPlay()->getCircular()->report(nodoCirculo);
+
+
+                                break;
+                            case '3':
+                                ayuda = false;
+                                break;
+
+                            default:
+
+                                cout << "Opcion no valida.\a\n";
+
+                                break;
+                            }
+                        }
+
+
+                    }
+                    else
+                    {
+                        cout << "Ocurrio un error volver a intentar "<< endl;
+                    }
+
+
                 }
                 else
                 {

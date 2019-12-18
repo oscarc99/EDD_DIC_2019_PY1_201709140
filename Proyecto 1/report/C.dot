@@ -1,0 +1,5 @@
+digraph R { 
+rankdir = DU;node [shape=rectangle, height=0.5, width=0.5];
+graph[ nodesep = 0.5];
+node0 [label = " Blinded " ];
+node0 [dir=back];}

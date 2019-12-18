@@ -228,17 +228,11 @@ bool ListaDSongs::existSong(string name, string albu, string years, string mes, 
 
 }
 
-void ListaDSongs::report()
+void ListaDSongs::report(nodeS* pintar)
 {
     string nodo="";
     string dir="";
-    string alinea="";//rank
-
-
     nodeS* temp = this->getFirst();
-    nodeS* begi= this->getFirst();
-
-
     ofstream archivo;
 
     if (this->isEmpty())
@@ -248,7 +242,7 @@ void ListaDSongs::report()
     else
     {
         ///Inicio archivo .dot
-        archivo.open("report\\artistas.dot", ios::out);
+        archivo.open("report\\PlaylistShuffle.dot", ios::out);
         archivo << "digraph R { \n";
         archivo << "rankdir = LR;";
         archivo << "node [shape=rectangle, height=0.5, width=0.5];\n";
@@ -256,8 +250,12 @@ void ListaDSongs::report()
         int c= 0;
         while (temp!= 0)
         {
+            if (temp->getDato()->getName().compare(pintar->getDato()->getName())==0){
+                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ;style = filled ; fillcolor= blue];\n";
+            }else{
+                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ];\n";
+            }
 
-            nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ];\n";
             if(temp->getNext()!=0)
             {
 
@@ -279,12 +277,69 @@ void ListaDSongs::report()
 
 
         archivo.close();
-        string crear = "dot.exe -Tpng report\\artistas.dot -o report\\artistas.png";
+        string crear = "dot.exe -Tpng report\\PlaylistShuffle.dot -o report\\PlaylistShuffle.png";
         system(crear.c_str());
-        ifstream image;
-        image.open("report\\artistas.png");
-        string s="report\\artistas.png" ;
+
+        string s="report\\PlaylistShuffle.png" ;
         system(s.c_str());
     }
 }
 
+
+void ListaDSongs::report(string cancion)
+{
+    string nodo="";
+    string dir="";
+    nodeS* temp = this->getFirst();
+    ofstream archivo;
+
+    if (this->isEmpty())
+    {
+
+    }
+    else
+    {
+        ///Inicio archivo .dot
+        archivo.open("report\\PlaylistShuffle.dot", ios::out);
+        archivo << "digraph R { \n";
+        archivo << "rankdir = LR;";
+        archivo << "node [shape=rectangle, height=0.5, width=0.5];\n";
+        archivo << "graph[ nodesep = 0.5];\n";
+        int c= 0;
+        while (temp!= 0)
+        {
+            if (temp->getDato()->getName().compare(cancion)==0){
+                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ;style = filled ; fillcolor= blue];\n";
+            }else{
+                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ];\n";
+            }
+
+            if(temp->getNext()!=0)
+            {
+
+                dir = dir + " node"+to_string(c)+ " -> ";
+            }
+            else
+            {
+
+                dir = dir + "node"+to_string(c)+" [dir=both];";
+            }
+            c++;
+            temp = temp->getNext();
+        }
+
+        archivo << nodo;
+        archivo << dir;
+
+        archivo <<"}";
+
+
+        archivo.close();
+        string crear = "dot.exe -Tpng report\\PlaylistShuffle.dot -o report\\PlaylistShuffle.png";
+        system(crear.c_str());
+        ifstream image;
+        image.open("report\\PlaylistShuffle.png");
+        string s="report\\PlaylistShuffle.png" ;
+        system(s.c_str());
+    }
+}

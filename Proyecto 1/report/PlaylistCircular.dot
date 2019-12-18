@@ -1,0 +1,10 @@
+digraph R { 
+rankdir = LR;node [shape=rectangle, height=0.5, width=0.5];
+graph[ nodesep = 0.5];
+node0 [label = " Young and Aspiring " ];
+node1 [label = " On My Teeth " ;style = filled ; fillcolor= blue];
+node2 [label = " Blinded " ];
+node3 [label = " On My Teeth " ;style = filled ; fillcolor= blue];
+node4 [label = " Blinded " ];
+node5 [label = " On My Teeth " ;style = filled ; fillcolor= blue];
+ node0 ->  node1 ->  node2 ->  node3 ->  node4 -> node5-> node0[dir=both];node5 [dir=both];}

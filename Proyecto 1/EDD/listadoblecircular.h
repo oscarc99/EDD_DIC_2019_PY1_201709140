@@ -52,13 +52,16 @@ class ListaDobleCicular
              last = 0;
              size = 0;
         }
+        NodoDC* getFirst(){return first;}
+        NodoDC* getLast(){return last;}
          int getSize(){return size;}
          void add_first(Song* dato);
          void add_last(Song* dato);
          void add_at(Song* dato, int index);
          Song* get_element_at(int index);
          void remove_at(int index);
-
+         void report(string cancion);
+         void report(NodoDC* pintar);
 
     private:
          bool isEmpty(){return size == 0;}

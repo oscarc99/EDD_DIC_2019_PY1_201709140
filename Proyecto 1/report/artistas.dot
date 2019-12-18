@@ -1,8 +1,10 @@
 digraph R { 
 rankdir = LR;node [shape=rectangle, height=0.5, width=0.5];
 graph[ nodesep = 0.5];
-node0 [label = " Alfredo " ];
-node1 [label = " Lemus " ];
-node2 [label = " Llamas " ];
-node3 [label = " Oscar " ];
- node0 ->  node1 ->  node2 -> node3 [dir=both];}
+node0 [label = " Young and Aspiring " ;style = filled ; fillcolor= blue];
+node1 [label = " On My Teeth " ];
+node2 [label = " Blinded " ];
+node3 [label = " On My Teeth " ];
+node4 [label = " Blinded " ];
+node5 [label = " On My Teeth " ];
+ node0 ->  node1 ->  node2 ->  node3 ->  node4 ->  node5 -> }

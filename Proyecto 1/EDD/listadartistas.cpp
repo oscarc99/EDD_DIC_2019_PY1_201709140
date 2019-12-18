@@ -165,9 +165,9 @@ void ListaDArtistas::insertOrdenado(Artist* art ){
 
 
 void ListaDArtistas::report(){
-     string nodo="";
+    string nodo="";
     string dir="";
-    string alinea="";//rank
+
 
 
     node* temp = this->getFirst();

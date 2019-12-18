@@ -45,10 +45,13 @@ class Cola
             fin=0;
             size=0;
         }
+        int getSize(){return size;}
         bool estaVaciaC();
         void enqueque(Song* dato);
         Song* dequeque();
         Song* peek();
+        void report(string name);
+        Nodo* getFirst(){return inicio;}
 
 
     private:
