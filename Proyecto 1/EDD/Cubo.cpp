@@ -422,7 +422,7 @@ void Cubo::generarReporte(string nameArt)
 
     ///Inicio archivo .dot
     archivo.open("report\\"+nameArt+"_Discografy.dot", ios::out);
-    archivo << "digraph R { \n";
+    archivo << "digraph G { \n";
     archivo << "rankdir = TB;";
     archivo << "node [shape=rectangle, height=0.5, width=0.5];\n";
     archivo << "graph[ nodesep = 0.5];\n";

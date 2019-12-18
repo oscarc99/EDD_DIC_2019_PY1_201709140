@@ -62,13 +62,24 @@ void ListaDSongs::add_at(Song *dato, int index)
 {
     if(index >= 0 && index <= this->size)
     {
-        if(index == 0){ this->add_first(dato); return;}
-        if(index == this->size) {this->add_last(dato); return;}
+        if(index == 0)
+        {
+            this->add_first(dato);
+            return;
+        }
+        if(index == this->size)
+        {
+            this->add_last(dato);
+            return;
+        }
         nodeS *aux = this->first;
         int x = 0;
         while(aux!=0)
         {
-            if(x == index){break;}
+            if(x == index)
+            {
+                break;
+            }
             aux = aux->getNext();
             x++;
         }
@@ -151,25 +162,36 @@ void ListaDSongs::remove_at(int index)
 
 void ListaDSongs::insertOrdenado(Song* a )
 {
-       if(this->isEmpty()){
-            this->add_first(a); return;
+    if(this->isEmpty())
+    {
+        this->add_first(a);
+        return;
+    }
+    int posicion = 0;
+    nodeS *aux = this->getFirst();
+    while(aux->getNext()!=0)
+    {
+        if(a->getName().compare(this->getFirst()->getDato()->getName()) == -1)
+        {
+            posicion=0;
+            break;
         }
-        int posicion = 0;
-        nodeS *aux = this->getFirst();
-        while(aux->getNext()!=0){
-            if(a->getName().compare(this->getFirst()->getDato()->getName()) == -1){
-                    posicion=0; break;
-            }
-            if(a->getName().compare(this->getLast()->getDato()->getName()) == 1){
-                    posicion=size; break;
-            }
-            if(a->getName().compare(aux->getDato()->getName()) == 1){
-                    posicion++;
-            }
-            if(a->getName().compare(aux->getNext()->getDato()->getName()) == -1){ break;}
-            aux = aux->getNext();
+        if(a->getName().compare(this->getLast()->getDato()->getName()) == 1)
+        {
+            posicion=size;
+            break;
         }
-        this->add_at(a, posicion);
+        if(a->getName().compare(aux->getDato()->getName()) == 1)
+        {
+            posicion++;
+        }
+        if(a->getName().compare(aux->getNext()->getDato()->getName()) == -1)
+        {
+            break;
+        }
+        aux = aux->getNext();
+    }
+    this->add_at(a, posicion);
 
 
 
@@ -177,7 +199,34 @@ void ListaDSongs::insertOrdenado(Song* a )
 
 }
 
+bool ListaDSongs::existSong(string name, string albu, string years, string mes, string artista)
+{
+    nodeS* tempS = this->getFirst();
+    while(tempS!=0)
+    {
 
+        if(tempS->getDato()->getName().compare(name) == 0 && tempS->getDato()->getArtist().compare(artista)==0 && tempS->getDato()->getAlbum().compare(albu)==0  && tempS->getDato()->getMonth().compare(mes)==0 && tempS->getDato()->getYear().compare(years)==0)
+        {
+            return true;
+        }
+        tempS= tempS->getNext();
+        if(tempS->getNext()==0)
+        {
+            if(tempS->getDato()->getName().compare(name) == 0 && tempS->getDato()->getArtist().compare(artista)==0 && tempS->getDato()->getAlbum().compare(albu)==0  && tempS->getDato()->getMonth().compare(mes)==0 && tempS->getDato()->getYear().compare(years)==0)
+            {
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+
+
+    }
+
+}
 
 void ListaDSongs::report()
 {

@@ -7,10 +7,9 @@ Song::Song(string nombre,  double puesto)
 
 }
 
-Song::Song(string nombre, double puesto, string anio, string Mes, string Album, string Artist){
+Song::Song(string nombre,  string anio, string Mes, string Album, string Artist){
 
         Name = nombre;
-        Ranking = puesto;
         ano = anio;
         mes = Mes;
         album = Album;

@@ -36,7 +36,7 @@ class ListaDSongs
         Song* get_element_at(int index);
         void remove_at(int index);
         bool isEmpty(){return size == 0;}
-
+        bool existSong(string name, string albu, string years, string mes, string artista);
         void insertOrdenado(Song* a);
         void report();
         ListaDSongs();

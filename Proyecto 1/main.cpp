@@ -5,12 +5,15 @@
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
+#include <vector>///UTILIZADO PARA EL SPLIT
+#include <stdio.h>
+#include <cstdlib>
+
 
 //Estructuras
 #include "Song.h"
 #include "ListaSimple.h"
 #include "Artist.h"
-#include "NodoC.h"
 #include "Pila.h"
 #include "Cola.h"
 #include "Cubo.h"
@@ -19,18 +22,25 @@
 #include "arbolbin.h"
 #include "listadsongs.h"
 
+#include "NodoC.h"
+#include "hoja.h"
+
 using namespace std;
 using json = nlohmann::json;
 
 
 ListaDArtistas *artistas;
-ArbolBin *reproduccion;
+ArbolBin *arbol;
 ListaDSongs *canciones;
+
+
+
 int main()
 {
+
     ///asigna estructuras a sus punteros
     artistas = new ListaDArtistas();
-    reproduccion = new ArbolBin();
+    arbol = new ArbolBin();
     canciones = new ListaDSongs();
     const string fileLibrary = "Library.json";
     ifstream reader(fileLibrary);
@@ -79,7 +89,7 @@ int main()
                         double r = atof(rating.c_str());;
 
                         ///cancion para lista de canciones global
-                        Song *ss = new Song(nameSong,r,year,mes,nameAlbum, nameArtist);
+                        Song *ss = new Song(nameSong,year,mes,nameAlbum, nameArtist);
                         canciones->insertOrdenado(ss);
 
                         /// cancion para el ambum del cubo del artista
@@ -120,6 +130,29 @@ int main()
         NodoC * cubo;
         Album* selectAlb;
         NodoLS* nodoLista;
+        string play;
+        Hoja* selectPlay;
+        string namePlayS;
+
+        string namePlayList;
+        string split ="_";
+        string split2 =".";
+        char* cstr;
+        char* current;
+        json l;
+        ifstream read;
+        Song* cancionT;
+        Playlist* playT;
+        Pila* pT;
+        Cola* cT;
+        int r=0;
+        ListaDSongs* shuffle;
+        ListaDobleCicular * circular;
+        ///vectores para split de name playlist
+        std::vector<std::string> arr;
+        std::vector<std::string> name;
+
+
         do
         {
             fart= artistas->getFirst();
@@ -134,7 +167,7 @@ int main()
             cout << "\t2 .- Visualizar Canciones" << endl;
             cout << "\t3 .- Ver Playlist" << endl;
             cout << "\t4 .- Importar Playlist" << endl;
-            cout << "\t5 .- Estadisticas" << endl;
+            cout << "\t5 .- My Music++" << endl;
             cout << "\t6 .- Salir" << endl << endl;
             cout << "Elije una opcion: ";
 
@@ -175,19 +208,23 @@ int main()
                         else
                         {
                             ///Debo recorrer en z si existe
-                            if(cubo->getArriba()!=0){
-                                while(cubo->getArriba()!=0){
+                            if(cubo->getArriba()!=0)
+                            {
+                                while(cubo->getArriba()!=0)
+                                {
                                     cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
                                     cubo->getAlbum()->setIndice(c);
-                                        c++;
+                                    c++;
                                     cubo= cubo->getArriba();
-                                    if(cubo->getArriba()==0){
+                                    if(cubo->getArriba()==0)
+                                    {
                                         cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
                                         cubo->getAlbum()->setIndice(c);
                                         c++;
                                     }
                                 }
-                                while(cubo->getAbajo()!= 0){
+                                while(cubo->getAbajo()!= 0)
+                                {
                                     cubo = cubo->getAbajo();
                                 }
 
@@ -210,29 +247,33 @@ int main()
                             }
                             else
                             {
-                            ///Debo recorrer en z si existe
-                            if(cubo->getArriba()!=0){
-                                while(cubo->getArriba()!=0){
-                                    cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
-                                    cubo->getAlbum()->setIndice(c);
-                                        c++;
-                                    cubo= cubo->getArriba();
-                                    if(cubo->getArriba()==0){
+                                ///Debo recorrer en z si existe
+                                if(cubo->getArriba()!=0)
+                                {
+                                    while(cubo->getArriba()!=0)
+                                    {
                                         cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
                                         cubo->getAlbum()->setIndice(c);
                                         c++;
+                                        cubo= cubo->getArriba();
+                                        if(cubo->getArriba()==0)
+                                        {
+                                            cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                                            cubo->getAlbum()->setIndice(c);
+                                            c++;
+                                        }
                                     }
+                                    while(cubo->getAbajo()!= 0)
+                                    {
+                                        cubo = cubo->getAbajo();
+                                    }
+
                                 }
-                                while(cubo->getAbajo()!= 0){
-                                    cubo = cubo->getAbajo();
-                                }
+                                cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                                cubo->getAlbum()->setIndice(c);
+                                c++;
 
                             }
-                            cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
-                            cubo->getAlbum()->setIndice(c);
-                            c++;
-
-                        }
 
                         }
 
@@ -256,7 +297,8 @@ int main()
                 cout <<" "<<  endl;
                 c=1;
                 nodoLista = albumS->getFirst();
-                while(nodoLista!=0){
+                while(nodoLista!=0)
+                {
                     cout << c <<".  "<< nodoLista->getDato()->getName()<<endl;
                     c++;
                     nodoLista= nodoLista->getNext();
@@ -266,8 +308,12 @@ int main()
                 cout << "Elija una cancion opcion:";
                 cin >> selecSong;
                 nodoLista = albumS->getFirst();
-                while(nodoLista!=0){
-                    if (selecSong == c){break;}
+                while(nodoLista!=0)
+                {
+                    if (selecSong == c)
+                    {
+                        break;
+                    }
                     c++;
                     nodoLista= nodoLista->getNext();
                 }
@@ -304,15 +350,204 @@ int main()
                 break;
 
             case '3':
-                system("cls");
-                cout << "Has elejido Multiplicar.\n";
+                cout << "Navegacion por PlayList.\n";
+                cout << arbol->menuInorden();
+                cout << "Ingrese nombre de la playlist desea reproducir:  ";
+                cin >> namePlayS;
+                selectPlay = arbol->buscar(namePlayS);
+                if (selectPlay!= 0)
+                {
+                    cout << "" << endl;
+                    cout << "Usted selecciono" << endl;
+                    cout << selectPlay->getPlay()->getName() << endl;
+                    cout << selectPlay->getPlay()->getType() << endl;
+                    arbol->report();
+                }
+                else
+                {
+                    cout << "No se encontro" << endl;
+                }
+
 
                 break;
 
             case '4':
-                system("cls");
-                cout << "Has elejido Dividir.\n";
+                play="";
+                namePlayList="";
+                arr.clear();
+                name.clear();
+                cout << "Importar Playlist.\n"<< endl;
+                cout << "Ingrese nombre del archivo de playlist:" ;
+                cin >> play;
+                read.open(play);
+                read >> l;
 
+
+                ///nameList = "Playlist_Rock.json";
+                try
+                {
+
+                    ///Ya dividi por _
+                    cstr=const_cast<char*>(play.c_str());
+                    current=strtok(cstr,split.c_str());
+                    while(current!=NULL)
+                    {
+                        arr.push_back(current);
+                        current=strtok(NULL,split.c_str());
+                    }
+
+
+                    ///cout << arr[1]<< endl; Nombre.json
+                    ///Volver a dividir
+                    cstr=const_cast<char*>(arr[1].c_str());
+                    current=strtok(cstr,split2.c_str());
+                    while(current!=NULL)
+                    {
+                        name.push_back(current);
+                        current=strtok(NULL,split2.c_str());
+                    }
+                    namePlayList=name[0];
+                    cout << namePlayList << endl;
+                }
+                catch (int e)
+                {
+                    cout << "An exception occurred. Exception Nr. " << e << '\n';
+                }
+
+                if (read.fail())
+                {
+
+                    cout<<"No existe el archivo necesario para el funcionamiento" << endl;
+
+                    cout <<"AGREGE ARCHIVO 'Library.json'" << endl;
+                }
+                else
+                {
+                    playT = new Playlist(namePlayList, l["Type"]);
+                    cout << l["Type"]<<endl;
+                    if (l["Type"]== "Stack")
+                    {
+                        ///Debo guardar en su pila de atributo
+                        pT = new Pila();
+                        for (const auto& so : l["Songs"])
+                        {
+                            if(canciones->existSong(so["Song"],so["Album"],so["Year"],so["Month"], so["Artist"]))
+                            {
+                                ///Si existe en libary entonces la crea y debe guardar
+                                cancionT = new Song(so["Song"],so["Year"],so["Month"], so["Album"], so["Artist"]);
+                                cout << "Cancion " << so["Song"] << "  EXISTE" << endl;
+                                pT->push(cancionT);
+                            }
+                            else
+                            {
+                                cout << "Cancion " << so["Song"] << "  NO EXISTE en Library" <<  endl;
+                            }
+
+                        }
+
+                        playT->setPila(pT);
+                        arbol->insertar(playT);
+
+
+
+                    }
+                    else if (l["Type"]== "Queue")
+                    {
+                        cT = new Cola();
+                        for (const auto& so : l["Songs"])
+                        {
+                            if(canciones->existSong(so["Song"],so["Album"],so["Year"],so["Month"], so["Artist"]))
+                            {
+                                ///Si existe en libary entonces la crea y debe guardar
+                                cancionT = new Song(so["Song"],so["Year"],so["Month"], so["Album"], so["Artist"]);
+                                cout << "Cancion " << so["Song"] << "  EXISTE" << endl;
+                                cT->enqueque(cancionT);
+                            }
+                            else
+                            {
+                                cout << "Cancion " << so["Song"] << "  NO EXISTE en Library" <<  endl;
+                            }
+
+                        }
+                        playT->setCola(cT);
+                        arbol->insertar(playT);
+
+
+                    }
+                    else if (l["Type"]== "Shuffle")
+                    {
+                        ///Agrego en lista doble circular pero en diferente orden
+                        shuffle = new ListaDSongs();
+                        for (const auto& so : l["Songs"])
+                        {
+                            if(canciones->existSong(so["Song"],so["Album"],so["Year"],so["Month"], so["Artist"]))
+                            {
+                                ///Si existe en libary entonces la crea y debe guardar
+                                cancionT = new Song(so["Song"],so["Year"],so["Month"], so["Album"], so["Artist"]);
+                                cout << "Cancion " << so["Song"] << "  EXISTE" << endl;
+
+                                ///shuffle->add_at(cancionT,0);
+                                ///shuffle->add_first(cancionT);
+                                ///shuffle->add_last(cancionT);
+                                /// ------------------- AGREGO RAMDOM ----------------
+                                if (shuffle->getSize() == 0 || shuffle->getSize() == 1)
+                                {
+                                    shuffle->add_first(cancionT);
+                                }
+                                else
+                                {
+                                    r = (rand() % shuffle->getSize() )+ 1;
+                                    shuffle->add_at(cancionT,r);
+
+
+                                }
+
+
+                            }
+                            else
+                            {
+                                cout << "Cancion " << so["Song"] << "  NO EXISTE en Library" <<  endl;
+                            }
+
+                        }
+
+                        playT->setLDoble(shuffle);
+                        arbol->insertar(playT);
+
+
+                    }
+                    else if (l["Type"]== "Circular")
+                    {
+
+                        circular = new ListaDobleCicular();
+                        for (const auto& so : l["Songs"])
+                        {
+                            if(canciones->existSong(so["Song"],so["Album"],so["Year"],so["Month"], so["Artist"]))
+                            {
+                                ///Si existe en libary entonces la crea y debe guardar
+                                cancionT = new Song(so["Song"],so["Year"],so["Month"], so["Album"], so["Artist"]);
+                                cout << "Cancion " << so["Song"] << "  EXISTE" << endl;
+                                circular->add_last(cancionT);
+                            }
+                            else
+                            {
+                                cout << "Cancion " << so["Song"] << "  NO EXISTE en Library" <<  endl;
+                            }
+
+                        }
+                        playT->setCircular(circular);
+                        arbol->insertar(playT);
+
+
+                    }
+
+
+
+
+
+                    read.close();
+                }
+                ///lectura de libreria automaticamente al inciar
                 break;
 
             case '5':
@@ -349,38 +584,18 @@ int main()
     return 0;
 }
 
-void agrgarPlaylist(string fileJson)
+
+///METODO SPLIT
+std::vector<std::string> split(std::string str,std::string sep)
 {
-    json j;
-    string nameList;
-    nameList = "Playlist_Rock.json";
-    int largeName = 0;
-    largeName = strlen(nameList.c_str());
-    cout<< largeName<< endl;
-
-    ifstream reader(nameList);
-    reader >> j;
-
-    string type = j["Typy"];
-    for (const auto& Song : j["Songs"])
+    char* cstr=const_cast<char*>(str.c_str());
+    char* current;
+    std::vector<std::string> arr;
+    current=strtok(cstr,sep.c_str());
+    while(current!=NULL)
     {
-        cout << "------------cancion------------" << endl;
-        string yea= Song["Year"];
-        string mes= Song["Month"];
-        string albu= Song["Album"];
-        string cancion= Song["Song"];
-        string artisa= Song["Artist"];
-
-
+        arr.push_back(current);
+        current=strtok(NULL,sep.c_str());
     }
-    reader.close();
-
+    return arr;
 }
-void pausa()
-{
-    cout << "Pulsa una tecla para continuar...";
-    getwchar();
-    getwchar();
-}
-
-

@@ -8,9 +8,10 @@ class Song
 {
     public:
         Song(string nombre, double puesto);
-        Song(string nombre, double puesto, string ano, string mes, string album, string artista);
+        Song(string nombre, string ano, string mes, string album, string artista);
 
         string getName(){return Name;}
+        string getYear(){return ano;}
         string getMonth(){return mes;}
         string getAlbum(){return album;}
         string getArtist(){return artist;}

@@ -4,13 +4,14 @@
 #include "Cola.h"
 #include "ListaDoble.h"
 #include "listadoblecircular.h"
+#include "listadsongs.h"
 #include "Song.h"
 
 
 class Playlist
 {
     public:
-        Playlist();
+        Playlist(string name, string tipo);
         virtual ~Playlist();
         string getName(){return nombre;}
         string getType(){return type;}
@@ -21,11 +22,11 @@ class Playlist
         Cola* getCola(){return col;}
         void setCola(Cola* queues){col = queues;}
 
-        ListaDoble<Song*>* getListaDoble(){return doble;}
-        void setLDoble(ListaDoble<Song*>* dobl){doble = dobl;}
+        ListaDSongs* getListaDoble(){return doble;}
+        void setLDoble(ListaDSongs* dobl){doble = dobl;}
 
-        ListaDobleCicular<Song*>* getCircular(){return circular;}
-        void setCircular(ListaDobleCicular<Song*>* circule){circular = circule;}
+        ListaDobleCicular* getCircular(){return circular;}
+        void setCircular(ListaDobleCicular* circule){circular = circule;}
 
 
     private:
@@ -33,8 +34,8 @@ class Playlist
         string type;
         Pila* pil;
         Cola* col;
-        ListaDoble<Song*>* doble ;
-        ListaDobleCicular<Song*>* circular;
+        ListaDSongs* doble ;
+        ListaDobleCicular* circular;
 
 
 
