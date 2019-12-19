@@ -52,6 +52,7 @@ class ListaSimple
          void add_at(Song* dato, int index);
          Song* get_element_at(int index);
          void remove_at(int index);
+         void report(string name);
 
 
     private:

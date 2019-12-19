@@ -1,0 +1,18 @@
+digraph G { 
+rankdir = TB;node [shape=rectangle, height=0.5, width=0.5];
+graph[ nodesep = 0.5];
+nodeMESES0 [label = "  (MESES , 0 ) root  " ]; 
+nodeMESES2019 [label = "  (MESES , 2019 ) MESES  " ]; 
+nodeSeptiembre0 [label = "  (Septiembre , 0 ) FILA  " ]; 
+nodeSeptiembre2019 [label = "  (Septiembre , 2019 ) Shaped By Fire  " ]; 
+nodeMESES0 -> nodeMESES2019; 
+nodeMESES2019 -> nodeMESES0; 
+nodeSeptiembre0 -> nodeSeptiembre2019[constraint=false]; 
+nodeSeptiembre2019 -> nodeSeptiembre0[constraint=false]; 
+nodeMESES0 -> nodeSeptiembre0; 
+nodeSeptiembre0 -> nodeMESES0; 
+nodeMESES2019 -> nodeSeptiembre2019; 
+nodeSeptiembre2019 -> nodeMESES2019; 
+{ rank = same;nodeMESES0 ;nodeMESES2019 ;} 
+{ rank = same;nodeSeptiembre0 ;nodeSeptiembre2019 ;} 
+}

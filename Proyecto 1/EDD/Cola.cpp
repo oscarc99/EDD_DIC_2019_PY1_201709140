@@ -37,7 +37,14 @@ void Cola::report(string name)
         while (temp!= 0)
         {
 
-            nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ];\n";
+            if (temp->getDato()->getName().compare(this->getFirst()->getDato()->getName())==0 ){
+                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ;style = filled ; fillcolor= green];\n";
+            }else{
+                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ];\n";
+
+            }
+
+
             if(temp->getNext()!=0)
             {
 

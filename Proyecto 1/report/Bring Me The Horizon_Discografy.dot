@@ -1,0 +1,42 @@
+digraph G { 
+rankdir = TB;node [shape=rectangle, height=0.5, width=0.5];
+graph[ nodesep = 0.5];
+nodeMESES0 [label = "  (MESES , 0 ) root  " ]; 
+nodeMESES2013 [label = "  (MESES , 2013 ) MESES  " ]; 
+nodeMESES2015 [label = "  (MESES , 2015 ) MESES  " ]; 
+nodeMESES2019 [label = "  (MESES , 2019 ) MESES  " ]; 
+nodeAbril0 [label = "  (Abril , 0 ) FILA  " ]; 
+nodeAbril2013 [label = "  (Abril , 2013 ) Sempiternal  " ]; 
+nodeSeptiembre0 [label = "  (Septiembre , 0 ) FILA  " ]; 
+nodeSeptiembre2015 [label = "  (Septiembre , 2015 ) That's the Spirit  " ]; 
+nodeEnero0 [label = "  (Enero , 0 ) FILA  " ]; 
+nodeEnero2019 [label = "  (Enero , 2019 ) Amo  " ]; 
+nodeMESES0 -> nodeMESES2013; 
+nodeMESES2013 -> nodeMESES2015; 
+nodeMESES2015 -> nodeMESES2019; 
+nodeMESES2019 -> nodeMESES2015; 
+nodeMESES2015 -> nodeMESES2013; 
+nodeMESES2013 -> nodeMESES0; 
+nodeAbril0 -> nodeAbril2013; 
+nodeAbril2013 -> nodeAbril0; 
+nodeSeptiembre0 -> nodeSeptiembre2015; 
+nodeSeptiembre2015 -> nodeSeptiembre0; 
+nodeEnero0 -> nodeEnero2019[constraint=false]; 
+nodeEnero2019 -> nodeEnero0[constraint=false]; 
+nodeMESES0 -> nodeAbril0; 
+nodeAbril0 -> nodeSeptiembre0; 
+nodeSeptiembre0 -> nodeEnero0; 
+nodeEnero0 -> nodeSeptiembre0; 
+nodeSeptiembre0 -> nodeAbril0; 
+nodeAbril0 -> nodeMESES0; 
+nodeMESES2013 -> nodeAbril2013; 
+nodeAbril2013 -> nodeMESES2013; 
+nodeMESES2015 -> nodeSeptiembre2015; 
+nodeSeptiembre2015 -> nodeMESES2015; 
+nodeMESES2019 -> nodeEnero2019; 
+nodeEnero2019 -> nodeMESES2019; 
+{ rank = same;nodeMESES0 ;nodeMESES2013 ;nodeMESES2015 ;nodeMESES2019 ;} 
+{ rank = same;nodeAbril0 ;nodeAbril2013 ;} 
+{ rank = same;nodeSeptiembre0 ;nodeSeptiembre2015 ;} 
+{ rank = same;nodeEnero0 ;nodeEnero2019 ;} 
+}

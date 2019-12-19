@@ -40,7 +40,7 @@ int main()
 {
 
     NodoP* nodoPila;
-
+    char m;
     ///asigna estructuras a sus punteros
     artistas = new ListaDArtistas();
     arbol = new ArbolBin();
@@ -100,7 +100,6 @@ int main()
                         can->add_first(s);
                         //cout << nameSong <<  endl;
                     }
-
                     Album *al = new Album(nameAlbum,mes,year,can);
                     ///---------converit año a int..............................------------
                     ///ARREGLAR
@@ -165,7 +164,7 @@ int main()
         std::vector<std::string> arr;
         std::vector<std::string> name;
         bool ayuda = true;
-
+        bool report = true;
         do
         {
             fart= artistas->getFirst();
@@ -183,15 +182,13 @@ int main()
             cout << "\t5 .- My Music++" << endl;
             cout << "\t6 .- Salir" << endl << endl;
             cout << "Elije una opcion: ";
-
             cin >> tecla;
-
             switch(tecla)
             {
             case '1':
+                cout << "----------------------------------------------" << endl;
                 cout <<"--------------NAVEGACION POR ARTISTA-------------"<<endl;
                 cout << "----------------------------------------------" << endl;
-
                 while (fart!=0)
                 {
                     cout << c <<". " << fart->getDato()->getName()<<endl;
@@ -205,11 +202,9 @@ int main()
 
                 selectArt=artistas->get_element_at(sA-1);
                 cubo = selectArt->getDiscografia()->getRoot();
-
                 ///RECORRO PRIMERO AÑOS
                 while(cubo!= 0)
                 {
-
                     cout << "ALBUM DE AÑO: "<<cubo->getX() <<endl;
                     ///RECORRO MESES DEL AÑO
                     while(cubo->getAdelante()!=0)
@@ -247,11 +242,7 @@ int main()
                             c++;
 
                         }
-
                         cubo=cubo->getAdelante();
-
-
-
                         if(cubo->getAdelante()==0)
                         {
                             if(cubo->getAlbum()->getName().compare("root") == 0 ||  cubo->getAlbum()->getName().compare("FILA") == 0 || cubo->getAlbum()->getName().compare("MESES") == 0 )
@@ -285,15 +276,11 @@ int main()
                                 cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
                                 cubo->getAlbum()->setIndice(c);
                                 c++;
-
                             }
 
                         }
 
-
                     }
-
-
                     ///REGRESO
                     while(cubo->getAtras()!=0)
                     {
@@ -334,14 +321,11 @@ int main()
                 cout << "----------------------------"<<endl;
                 cout << "SELECCIONO"<<nodoLista->getDato()->getName()<< endl;
                 cout << "SELECCIONO"<<nodoLista->getDato()->getRanking()<< endl;
-
                 break;
-
             case '2':
                 cout <<"---------------------------"<<endl;
                 cout << "NAVEGACION POR CANCION."<< endl;
                 cout << "--------------------------" << endl;
-
                 while (fsong!=0)
                 {
                     cout << c <<". " << fsong->getDato()->getName()<<endl;
@@ -361,9 +345,10 @@ int main()
                 cout << "---------" << endl;
                 c=1;
                 break;
-
             case '3':
-                cout << "Navegacion por PlayList.\n";
+                cout << "-------------------------------------" << endl;
+                cout << "------- Navegacion por PlayList.-----\n";
+                cout << "-------------------------------------" << endl;
                 cout << arbol->menuInorden();
                 cout << "Ingrese nombre de la playlist desea reproducir:  ";
                 cin >> namePlayS;
@@ -375,9 +360,6 @@ int main()
                     cout << "Usted selecciono" << endl;
                     cout << selectPlay->getPlay()->getName() << endl;
                     cout << selectPlay->getPlay()->getType() << endl;
-
-
-
                     if(selectPlay->getPlay()->getType().compare("Stack")==0)
                     {
                         while (selectPlay->getPlay()->getPila()->getSize() != 0)
@@ -396,18 +378,15 @@ int main()
                             selectPlay->getPlay()->getCola()->dequeque();
                             Sleep(3000);
                         }
-
-
-
                     }
                     else if(selectPlay->getPlay()->getType().compare("Shuffle")==0)
                     {
                         cout << selectPlay->getPlay()->getListaDoble()->getSize() << endl;
                         dobleT = selectPlay->getPlay()->getListaDoble();
-
                         nodoDoble = selectPlay->getPlay()->getListaDoble()->getFirst();
                         selectPlay->getPlay()->getListaDoble()->report(nodoDoble);
-                        while(ayuda){
+                        while(ayuda)
+                        {
                             cout << "\t1 .- Reproducir Siguiente" << endl;
                             cout << "\t2 .- Reproducir Anterior" << endl;
                             cout << "\t3 .- Stop playlist" << endl;
@@ -415,49 +394,46 @@ int main()
                             switch(ld)
                             {
                             case '1':
-                                if(nodoDoble->getNext()==0){
+                                if(nodoDoble->getNext()==0)
+                                {
                                     ayuda =false;
                                     break;
-                                }else{
+                                }
+                                else
+                                {
                                     nodoDoble = nodoDoble->getNext();
                                     selectPlay->getPlay()->getListaDoble()->report(nodoDoble->getDato()->getName());
                                 }
-
                                 break;
                             case '2':
-                                 if(nodoDoble->getBefore()==0){
+                                if(nodoDoble->getBefore()==0)
+                                {
                                     ayuda=false;
                                     break;
-                                }else{
+                                }
+                                else
+                                {
                                     nodoDoble = nodoDoble->getBefore();
                                     selectPlay->getPlay()->getListaDoble()->report(nodoDoble->getDato()->getName());
                                 }
-
                                 break;
                             case '3':
                                 ayuda = false;
                                 break;
-
                             default:
-
                                 cout << "Opcion no valida.\a\n";
-
                                 break;
                             }
                         }
-
-                    cout << "Se termino la lista de reproduccion" << endl;
-
-
-
-
+                        cout << "Se termino la lista de reproduccion" << endl;
                     }
                     else if(selectPlay->getPlay()->getType().compare("Circular")==0)
                     {
                         circularT = selectPlay->getPlay()->getCircular();
                         nodoCirculo= selectPlay->getPlay()->getCircular()->getFirst();
                         selectPlay->getPlay()->getCircular()->report(nodoCirculo);
-                        while(ayuda){
+                        while(ayuda)
+                        {
                             cout << "\t1 .- Reproducir Siguiente" << endl;
                             cout << "\t2 .- Reproducir Anterior" << endl;
                             cout << "\t3 .- Stop playlist" << endl;
@@ -466,47 +442,32 @@ int main()
                             {
                             case '1':
 
-                                    nodoCirculo = nodoCirculo->getNext();
-                                    selectPlay->getPlay()->getCircular()->report(nodoCirculo);
-
-
+                                nodoCirculo = nodoCirculo->getNext();
+                                selectPlay->getPlay()->getCircular()->report(nodoCirculo);
                                 break;
                             case '2':
-
-                                    nodoCirculo= nodoCirculo->getBefore();
-                                    selectPlay->getPlay()->getCircular()->report(nodoCirculo);
-
-
+                                nodoCirculo= nodoCirculo->getBefore();
+                                selectPlay->getPlay()->getCircular()->report(nodoCirculo);
                                 break;
                             case '3':
                                 ayuda = false;
                                 break;
-
                             default:
-
                                 cout << "Opcion no valida.\a\n";
-
                                 break;
                             }
                         }
-
-
                     }
                     else
                     {
                         cout << "Ocurrio un error volver a intentar "<< endl;
                     }
-
-
                 }
                 else
                 {
                     cout << "No se encontro" << endl;
                 }
-
-
                 break;
-
             case '4':
                 play="";
                 namePlayList="";
@@ -517,12 +478,9 @@ int main()
                 cin >> play;
                 read.open(play);
                 read >> l;
-
-
                 ///nameList = "Playlist_Rock.json";
                 try
                 {
-
                     ///Ya dividi por _
                     cstr=const_cast<char*>(play.c_str());
                     current=strtok(cstr,split.c_str());
@@ -531,8 +489,6 @@ int main()
                         arr.push_back(current);
                         current=strtok(NULL,split.c_str());
                     }
-
-
                     ///cout << arr[1]<< endl; Nombre.json
                     ///Volver a dividir
                     cstr=const_cast<char*>(arr[1].c_str());
@@ -552,9 +508,7 @@ int main()
 
                 if (read.fail())
                 {
-
                     cout<<"No existe el archivo necesario para el funcionamiento" << endl;
-
                     cout <<"AGREGE ARCHIVO 'Library.json'" << endl;
                 }
                 else
@@ -687,9 +641,196 @@ int main()
                 break;
 
             case '5':
-                bandera=true;
-                exit(1);
-                break;
+                do
+                {
+                    fart= artistas->getFirst();
+                    fsong = canciones->getFirst();
+                    cin.clear();
+                    cout << "-----------------------------------------" << endl;
+                    cout << "---------------My Music++ ---------------" << endl;
+                    cout << "-----------------------------------------" << endl;
+
+                    cout << "\t1 .- Artist Report" << endl;
+                    cout << "\t2 .- Discogrphy Report" << endl;
+                    cout << "\t3 .- Album Report" << endl;
+                    cout << "\t4 .- Playlist Report" << endl;
+                    cout << "\t5 .- Top 5 Albums by Artist Report" << endl;
+                    cout << "\t6 .- Top 5 Artist" << endl;
+                    cout << "\t7 .- Regesar" << endl;
+
+                    cout << "Elije una opcion: ";
+
+                    cin >> m;
+
+                    switch(m)
+                    {
+                    case '1':
+                        artistas->report();
+                        break;
+                    case '2':
+
+                        fart= artistas->getFirst();
+                        c=1;
+                        while (fart!=0)
+                        {
+                            cout << c <<". " << fart->getDato()->getName()<<endl;
+                            fart= fart->getNext();
+                            c++;
+                        }
+                        c=1;
+                        cout << "Elija un artista opcion:  ";
+                        cin >> sA;
+                        cout << "\n "<<endl;
+
+                        selectArt=artistas->get_element_at(sA-1);
+                        selectArt->getDiscografia()->generarReporte(selectArt->getName());
+
+
+                        break;
+                    case '3':
+
+                        fart= artistas->getFirst();
+                        while (fart!=0)
+                        {
+                            cout << c <<". " << fart->getDato()->getName()<<endl;
+                            fart= fart->getNext();
+                            c++;
+                        }
+                        c=1;
+                        cout << "Elija un artista opcion:";
+                        cin >> sA;
+                        cout << "\n "<<endl;
+
+                        selectArt=artistas->get_element_at(sA-1);
+                        cubo = selectArt->getDiscografia()->getRoot();
+
+                        ///RECORRO PRIMERO AÑOS
+                        while(cubo!= 0)
+                        {
+
+                            cout << "ALBUM DE AÑO: "<<cubo->getX() <<endl;
+                            ///RECORRO MESES DEL AÑO
+                            while(cubo->getAdelante()!=0)
+                            {
+                                if(cubo->getAlbum()->getName().compare("root") == 0 ||  cubo->getAlbum()->getName().compare("FILA") == 0 || cubo->getAlbum()->getName().compare("MESES") == 0 )
+                                {
+
+                                }
+                                else
+                                {
+                                    ///Debo recorrer en z si existe
+                                    if(cubo->getArriba()!=0)
+                                    {
+                                        while(cubo->getArriba()!=0)
+                                        {
+                                            cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                                            cubo->getAlbum()->setIndice(c);
+                                            c++;
+                                            cubo= cubo->getArriba();
+                                            if(cubo->getArriba()==0)
+                                            {
+                                                cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+
+                                                c++;
+                                            }
+                                        }
+                                        while(cubo->getAbajo()!= 0)
+                                        {
+                                            cubo = cubo->getAbajo();
+                                        }
+
+                                    }
+                                    cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+
+                                    c++;
+
+                                }
+
+                                cubo=cubo->getAdelante();
+
+
+
+                                if(cubo->getAdelante()==0)
+                                {
+                                    if(cubo->getAlbum()->getName().compare("root") == 0 ||  cubo->getAlbum()->getName().compare("FILA") == 0 || cubo->getAlbum()->getName().compare("MESES") == 0 )
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        ///Debo recorrer en z si existe
+                                        if(cubo->getArriba()!=0)
+                                        {
+                                            while(cubo->getArriba()!=0)
+                                            {
+                                                cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+
+                                                c++;
+                                                cubo= cubo->getArriba();
+                                                if(cubo->getArriba()==0)
+                                                {
+                                                    cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+
+                                                    c++;
+                                                }
+                                            }
+                                            while(cubo->getAbajo()!= 0)
+                                            {
+                                                cubo = cubo->getAbajo();
+                                            }
+
+                                        }
+                                        cout<<c<<". " <<cubo->getAlbum()->getName() << endl;
+                                        cubo->getAlbum()->setIndice(c);
+                                        c++;
+
+                                    }
+
+                                }
+
+
+                            }
+
+
+                            ///REGRESO
+                            while(cubo->getAtras()!=0)
+                            {
+                                cubo=cubo->getAtras();
+                            }
+                            cubo= cubo->getDerecha();
+                        }
+                        cout << "Elija un album opcion:";
+                        cin >> indexAlb;
+                        selectAlb= selectArt->getDiscografia()->getAlbum(indexAlb);
+                        selectAlb->getCanciones()->report(selectAlb->getName());
+
+
+                        break;
+                    case '4':
+                        arbol->report();
+                        break;
+                    case '5':
+                        report= false;
+                        break;
+                    case '6':
+                        report= false;
+                        break;
+
+
+                    case '7':
+                        report= false;
+                        break;
+                    default:
+
+                        cout << "Opcion no valida.\a\n";
+
+                        break;
+                    }
+                }
+                while(report );
+
+
+                    break;
             case '6':
                 bandera=true;
                 exit(1);
@@ -718,20 +859,4 @@ int main()
 
 
     return 0;
-}
-
-
-///METODO SPLIT
-std::vector<std::string> split(std::string str,std::string sep)
-{
-    char* cstr=const_cast<char*>(str.c_str());
-    char* current;
-    std::vector<std::string> arr;
-    current=strtok(cstr,sep.c_str());
-    while(current!=NULL)
-    {
-        arr.push_back(current);
-        current=strtok(NULL,sep.c_str());
-    }
-    return arr;
 }

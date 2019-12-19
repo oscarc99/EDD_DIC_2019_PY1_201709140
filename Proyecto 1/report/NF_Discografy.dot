@@ -1,0 +1,54 @@
+digraph G { 
+rankdir = TB;node [shape=rectangle, height=0.5, width=0.5];
+graph[ nodesep = 0.5];
+nodeMESES0 [label = "  (MESES , 0 ) root  " ]; 
+nodeMESES2015 [label = "  (MESES , 2015 ) MESES  " ]; 
+nodeMESES2016 [label = "  (MESES , 2016 ) MESES  " ]; 
+nodeMESES2017 [label = "  (MESES , 2017 ) MESES  " ]; 
+nodeMESES2019 [label = "  (MESES , 2019 ) MESES  " ]; 
+nodeJulio0 [label = "  (Julio , 0 ) FILA  " ]; 
+nodeJulio2019 [label = "  (Julio , 2019 ) The Search  " ]; 
+nodeAbril0 [label = "  (Abril , 0 ) FILA  " ]; 
+nodeAbril2016 [label = "  (Abril , 2016 ) Therapy Session  " ]; 
+nodeMarzo0 [label = "  (Marzo , 0 ) FILA  " ]; 
+nodeMarzo2015 [label = "  (Marzo , 2015 ) Mansion  " ]; 
+nodeOctubre0 [label = "  (Octubre , 0 ) FILA  " ]; 
+nodeOctubre2017 [label = "  (Octubre , 2017 ) Perception  " ]; 
+nodeMESES0 -> nodeMESES2015; 
+nodeMESES2015 -> nodeMESES2016; 
+nodeMESES2016 -> nodeMESES2017; 
+nodeMESES2017 -> nodeMESES2019; 
+nodeMESES2019 -> nodeMESES2017; 
+nodeMESES2017 -> nodeMESES2016; 
+nodeMESES2016 -> nodeMESES2015; 
+nodeMESES2015 -> nodeMESES0; 
+nodeJulio0 -> nodeJulio2019; 
+nodeJulio2019 -> nodeJulio0; 
+nodeAbril0 -> nodeAbril2016; 
+nodeAbril2016 -> nodeAbril0; 
+nodeMarzo0 -> nodeMarzo2015; 
+nodeMarzo2015 -> nodeMarzo0; 
+nodeOctubre0 -> nodeOctubre2017[constraint=false]; 
+nodeOctubre2017 -> nodeOctubre0[constraint=false]; 
+nodeMESES0 -> nodeJulio0; 
+nodeJulio0 -> nodeAbril0; 
+nodeAbril0 -> nodeMarzo0; 
+nodeMarzo0 -> nodeOctubre0; 
+nodeOctubre0 -> nodeMarzo0; 
+nodeMarzo0 -> nodeAbril0; 
+nodeAbril0 -> nodeJulio0; 
+nodeJulio0 -> nodeMESES0; 
+nodeMESES2015 -> nodeMarzo2015; 
+nodeMarzo2015 -> nodeMESES2015; 
+nodeMESES2016 -> nodeAbril2016; 
+nodeAbril2016 -> nodeMESES2016; 
+nodeMESES2017 -> nodeOctubre2017; 
+nodeOctubre2017 -> nodeMESES2017; 
+nodeMESES2019 -> nodeJulio2019; 
+nodeJulio2019 -> nodeMESES2019; 
+{ rank = same;nodeMESES0 ;nodeMESES2015 ;nodeMESES2016 ;nodeMESES2017 ;nodeMESES2019 ;} 
+{ rank = same;nodeJulio0 ;nodeJulio2019 ;} 
+{ rank = same;nodeAbril0 ;nodeAbril2016 ;} 
+{ rank = same;nodeMarzo0 ;nodeMarzo2015 ;} 
+{ rank = same;nodeOctubre0 ;nodeOctubre2017 ;} 
+}

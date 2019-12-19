@@ -2,7 +2,7 @@
 1576479487 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\album.cpp
 	"Album.h"
 
-1576484936 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\album.h
+1576716970 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\clases\album.h
 	<string>
 	"ListaSimple.h"
 	"Song.h"
@@ -34,7 +34,7 @@
 	<string>
 	"Cubo.h"
 
-1576665196 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\main.cpp
+1576725433 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\main.cpp
 	<iostream>
 	<fstream>
 	<string>
@@ -67,15 +67,20 @@
 1575872165 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadoble.cpp
 	"ListaDoble.h"
 
-1576479694 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listasimple.cpp
+1576721736 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listasimple.cpp
 	"ListaSimple.h"
+	<sstream>
+	<fstream>
+	<string>
+	<iostream>
+	<string.h>
 
 1576657293 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\pila.cpp
 	"Pila.h"
 	<fstream>
 	<string>
 
-1576659125 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cola.cpp
+1576726276 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cola.cpp
 	"Cola.h"
 	<fstream>
 	<string>
@@ -436,7 +441,7 @@
 
 1575197604 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\include\nlohmann\thirdparty\hedley\hedley_undef.hpp
 
-1576486898 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listasimple.h
+1576717330 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listasimple.h
 	"Song.h"
 
 1576136215 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\hoja.cpp
@@ -445,7 +450,7 @@
 1576597294 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\hoja.h
 	"playlist.h"
 
-1576664458 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadoblecircular.cpp
+1576665664 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadoblecircular.cpp
 	"listadoblecircular.h"
 	<sstream>
 	<fstream>

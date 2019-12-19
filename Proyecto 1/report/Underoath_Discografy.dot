@@ -1,4 +1,4 @@
-digraph R { 
+digraph G { 
 rankdir = TB;node [shape=rectangle, height=0.5, width=0.5];
 graph[ nodesep = 0.5];
 nodeMESES0 [label = "  (MESES , 0 ) root  " ]; 
@@ -6,11 +6,11 @@ nodeMESES2004 [label = "  (MESES , 2004 ) MESES  " ];
 nodeMESES2018 [label = "  (MESES , 2018 ) MESES  " ]; 
 nodeJulio0 [label = "  (Julio , 0 ) FILA  " ]; 
 nodeJulio2004 [label = "  (Julio , 2004 ) They're Only Chasing Safety  " ]; 
-node1Julio2004 [label = "  (Julio , 2004 ) They're Only 2  " ]; 
+node1Julio2004 [label = "  (Julio , 2004 ) They're Only Chasing Safety  " ]; 
 nodeJulio2004 [label = "  (Julio , 2004 ) They're Only Chasing Safety  " ]; 
 nodeAbril0 [label = "  (Abril , 0 ) FILA  " ]; 
 nodeAbril2018 [label = "  (Abril , 2018 ) Erase Me  " ]; 
-node1Abril2018 [label = "  (Abril , 2018 ) Erase 2  " ]; 
+node1Abril2018 [label = "  (Abril , 2018 ) Erase Me  " ]; 
 nodeAbril2018 [label = "  (Abril , 2018 ) Erase Me  " ]; 
 nodeMESES0 -> nodeMESES2004; 
 nodeMESES2004 -> nodeMESES2018; 
