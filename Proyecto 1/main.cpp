@@ -218,20 +218,24 @@ int main()
                 cout << "----------------------------------------------" << endl;
                 cout <<"--------------NAVEGACION POR ARTISTA-------------"<<endl;
                 cout << "----------------------------------------------" << endl;
+                c=1;
                 while (fart!=0)
                 {
                     cout << c <<". " << fart->getDato()->getName()<<endl;
                     fart= fart->getNext();
                     c++;
                 }
-                c=1;
+
                 cout << "Elija un artista opcion:";
                 cin >> sA;
                 cout << "\n "<<endl;
 
+
+
                 selectArt=artistas->get_element_at(sA-1);
                 cubo = selectArt->getDiscografia()->getRoot();
                 ///RECORRO PRIMERO AÑOS
+                c=1;
                 while(cubo!= 0)
                 {
                     cout << "ALBUM DE AÑO: "<<cubo->getX() <<endl;
@@ -353,6 +357,9 @@ int main()
                 cout << "Rating: "<<nodoLista->getDato()->getRanking()<< endl;
                 cout << "Artist: "<< artistas->get_element_at(sA-1)->getName() << endl;
                 cout << "Album: " << selectArt->getDiscografia()->getAlbum(indexAlb)->getName() << endl ;
+
+
+
 
                 break;
             case '2':

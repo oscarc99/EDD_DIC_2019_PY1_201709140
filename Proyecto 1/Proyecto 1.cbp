@@ -63,7 +63,6 @@
 		<Unit filename="EDD/Pila.h" />
 		<Unit filename="EDD/arbolbin.cpp" />
 		<Unit filename="EDD/arbolbin.h" />
-		<Unit filename="EDD/discografy.cpp" />
 		<Unit filename="EDD/discografy.h" />
 		<Unit filename="EDD/hoja.cpp" />
 		<Unit filename="EDD/hoja.h" />

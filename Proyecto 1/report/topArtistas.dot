@@ -1,0 +1,6 @@
+digraph R { 
+rankdir = LR;node [shape=rectangle, height=0.5, width=0.5];
+graph[ nodesep = 0.5];
+node0 [label = " TOP1. 9.000000.  As I Lay Dying " ];
+node1 [label = " TOP2. 8.500000.  Underoath " ];
+ node0 -> node1 [dir=both];}

@@ -1,0 +1,7 @@
+digraph G { 
+node [shape = name]; 
+rankdir=LR; 
+2[label=  <<table border= "1 " cellspacing= " 0 "><tr>
+<td BGCOLOR= "skyblue"> Young and Aspiring </td> </tr> 
+</table>>]; 
+}

@@ -1,0 +1,14 @@
+digraph G { 
+nodesep=0.8;
+ranksep=0.5;
+
+  
+A[label=" A" ];
+C->A; 
+S[label=" S" ];
+R->S; 
+R[label=" R" ];
+C->R; 
+C[label=" C" ];
+
+}
