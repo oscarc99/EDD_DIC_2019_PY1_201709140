@@ -251,7 +251,7 @@ void ListaDSongs::report(nodeS* pintar)
         while (temp!= 0)
         {
             if (temp->getDato()->getName().compare(pintar->getDato()->getName())==0){
-                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ;style = filled ; fillcolor= blue];\n";
+                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ;style = filled ; fillcolor= skyblue];\n";
             }else{
                 nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ];\n";
             }

@@ -28,7 +28,7 @@ void Cola::report(string name)
     else
     {
         ///Inicio archivo .dot
-        archivo.open("report\\"+name+".dot", ios::out);
+        archivo.open("report\\Cola.dot", ios::out);
         archivo << "digraph R { \n";
         archivo << "rankdir = RL;";
         archivo << "node [shape=rectangle, height=0.5, width=0.5];\n";
@@ -38,7 +38,7 @@ void Cola::report(string name)
         {
 
             if (temp->getDato()->getName().compare(this->getFirst()->getDato()->getName())==0 ){
-                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ;style = filled ; fillcolor= green];\n";
+                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ;style = filled ; fillcolor= skyblue];\n";
             }else{
                 nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ];\n";
 
@@ -66,9 +66,9 @@ void Cola::report(string name)
 
 
         archivo.close();
-        string crear = "dot.exe -Tpng report\\"+name+".dot -o report\\"+name+".png";
+        string crear = "dot.exe -Tpng report\\Cola.dot -o report\\Cola.png";
         system(crear.c_str());
-        string s="report\\"+name+".png" ;
+        string s="report\\Cola.png" ;
         system(s.c_str());
     }
 

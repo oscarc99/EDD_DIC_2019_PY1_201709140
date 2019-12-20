@@ -31,18 +31,26 @@ using json = nlohmann::json;
 
 
 ListaDArtistas *artistas;
+ListaDArtistas *rateArt;
 ArbolBin *arbol;
 ListaDSongs *canciones;
+
 
 
 
 int main()
 {
 
+    double cSongs,cAlbum;
+    double promSongs, promAlbum;
+
+
+
     NodoP* nodoPila;
     char m;
     ///asigna estructuras a sus punteros
     artistas = new ListaDArtistas();
+    rateArt = new ListaDArtistas();
     arbol = new ArbolBin();
     canciones = new ListaDSongs();
     const string fileLibrary = "Library.json";
@@ -59,7 +67,10 @@ int main()
     else
     {
 
-
+    cSongs=1;//cuenta dentro las canciones en por cada album reincia
+    cAlbum=1; //cuanta dentro los albums en cada artista reinicia
+    promSongs=0;
+    promAlbum=0;
 
 
         for (const auto& libr : j)
@@ -67,30 +78,37 @@ int main()
             ///ESTOY DENTRO DE LA LIBRERIA
             for (const auto& Art : libr)
             {
+
                 //cout << "----------------------------" << endl;
                 //cout << "      ------- ARTISTA  ------" << endl;
                 ///ESTOY DENTRO DE LA artista
+                cAlbum = 1;
+
                 string nameArtist = Art["Artist"]["Name"];
                 Cubo *disc = new Cubo();
+                ListaDAlbum* Talbum = new ListaDAlbum();
+
                 ///Lleno cubp con los albums
                 for (const auto& albums : Art["Artist"]["Albums"])
                 {
+
                     ///ESTOY DENTRO DE LA albums
                     //cout << "      -------           ALBUM   ------" << endl;
                     string nameAlbum = albums["Name"];
                     string mes = albums ["Month"];
                     string year = albums["Year"];
                     //cout << nameAlbum <<endl;
-
+                    cSongs=0;
+                    promSongs=0;
                     ListaSimple *can = new ListaSimple();
                     for (const auto& song : albums["Songs"])
-                    {
+                    {   cSongs++;
                         ///ESTOY DENTRO DE canciones
                         //cout << "      -------                            CANCIONES  ------" << endl;
                         string nameSong = song["Name"];
                         string rating = song["Rating"];
                         double r = atof(rating.c_str());;
-
+                        promSongs = promSongs + r;
                         ///cancion para lista de canciones global
                         Song *ss = new Song(nameSong,year,mes,nameAlbum, nameArtist);
                         canciones->insertOrdenado(ss);
@@ -100,17 +118,28 @@ int main()
                         can->add_first(s);
                         //cout << nameSong <<  endl;
                     }
+                    promSongs = promSongs / cSongs;
                     Album *al = new Album(nameAlbum,mes,year,can);
+                    al->setRating(promSongs);
+                    Talbum->insertOrdenadoRate(al);
+
+
+
+
                     ///---------converit año a int..............................------------
                     ///ARREGLAR
                     int ye=0;
 
                     std::istringstream(year) >> ye;
                     disc->insertAlbum(ye, mes, al);
+
                 }
 
                 ///Luego de llenado ingresa
                 Artist *a = new Artist(nameArtist,disc);
+                a->setAlbums(Talbum);
+                a->setRating(Talbum->promedioRating());
+                rateArt->insertOrdenadoRate(a);
                 artistas->insertOrdenado(a);
             }
         }
@@ -303,7 +332,7 @@ int main()
                     c++;
                     nodoLista= nodoLista->getNext();
                 }
-                //VAMOS BIEN
+
                 c=1;
                 cout << "Elija una cancion opcion:";
                 cin >> selecSong;
@@ -319,13 +348,18 @@ int main()
                 }
                 c=1;
                 cout << "----------------------------"<<endl;
-                cout << "SELECCIONO"<<nodoLista->getDato()->getName()<< endl;
-                cout << "SELECCIONO"<<nodoLista->getDato()->getRanking()<< endl;
+                cout << " -- You select:  " << endl;
+                cout << "Name: "<<nodoLista->getDato()->getName()<< endl;
+                cout << "Rating: "<<nodoLista->getDato()->getRanking()<< endl;
+                cout << "Artist: "<< artistas->get_element_at(sA-1)->getName() << endl;
+                cout << "Album: " << selectArt->getDiscografia()->getAlbum(indexAlb)->getName() << endl ;
+
                 break;
             case '2':
                 cout <<"---------------------------"<<endl;
                 cout << "NAVEGACION POR CANCION."<< endl;
                 cout << "--------------------------" << endl;
+                try {
                 while (fsong!=0)
                 {
                     cout << c <<". " << fsong->getDato()->getName()<<endl;
@@ -335,20 +369,25 @@ int main()
                 cout << " \n"<<endl;
                 cout << "Elija una opcion:";
                 cin >>sS;
+
                 cout << "---------" << endl;
                 cout <<"YOU SELECT :" <<endl;
                 selectSong= canciones->get_element_at(sS-1);
-                cout << selectSong->getName()<<endl;
-                cout << selectSong->getArtist()<<endl;
-                cout << selectSong->getAlbum()<<endl;
-                cout << selectSong->getRanking()<<endl;
+                cout << "Name: "<< selectSong->getName()<<endl;
+                cout << "Artist: "<<selectSong->getArtist()<<endl;
+                cout << "Album: "<<selectSong->getAlbum()<<endl;
+                cout << "Rating: "<<selectSong->getRanking()<<endl;
                 cout << "---------" << endl;
+                }catch(int e){
+                    cout << "An exception occurred. Exception Nr. " << e << '\n';
+                }
                 c=1;
                 break;
             case '3':
                 cout << "-------------------------------------" << endl;
                 cout << "------- Navegacion por PlayList.-----\n";
                 cout << "-------------------------------------" << endl;
+                if (arbol->getRoot()!=0){
                 cout << arbol->menuInorden();
                 cout << "Ingrese nombre de la playlist desea reproducir:  ";
                 cin >> namePlayS;
@@ -364,7 +403,7 @@ int main()
                     {
                         while (selectPlay->getPlay()->getPila()->getSize() != 0)
                         {
-                            selectPlay->getPlay()->getPila()->report(selectPlay->getPlay()->getName() );
+                            selectPlay->getPlay()->getPila()->report();
                             selectPlay->getPlay()->getPila()->pop();
                             Sleep(3000);
                         }
@@ -467,6 +506,10 @@ int main()
                 {
                     cout << "No se encontro" << endl;
                 }
+                }else{
+                cout << "Cargue Playlist para esta funcion" << endl;
+
+                }
                 break;
             case '4':
                 play="";
@@ -500,11 +543,7 @@ int main()
                     }
                     namePlayList=name[0];
                     cout << namePlayList << endl;
-                }
-                catch (int e)
-                {
-                    cout << "An exception occurred. Exception Nr. " << e << '\n';
-                }
+
 
                 if (read.fail())
                 {
@@ -636,6 +675,11 @@ int main()
 
 
                     read.close();
+                }
+                }
+                catch (int e)
+                {
+                    cout << "An exception occurred. Exception Nr. " << e << '\n';
                 }
                 ///lectura de libreria automaticamente al inciar
                 break;
@@ -803,17 +847,34 @@ int main()
                         cin >> indexAlb;
                         selectAlb= selectArt->getDiscografia()->getAlbum(indexAlb);
                         selectAlb->getCanciones()->report(selectAlb->getName());
-
+                    c=1;
 
                         break;
                     case '4':
                         arbol->report();
                         break;
                     case '5':
-                        report= false;
+                        //TOP 5 ALbum more rating
+                        fart= artistas->getFirst();
+                        c=1;
+                        while (fart!=0)
+                        {
+                            cout << c <<". " << fart->getDato()->getName()<<endl;
+                            fart= fart->getNext();
+                            c++;
+                        }
+                        c=1;
+                        cout << "Elija un artista opcion:  ";
+                        cin >> sA;
+                        cout << "\n "<<endl;
+
+                        selectArt=artistas->get_element_at(sA-1);
+                        selectArt->getAlbums()->topFive();
+
                         break;
                     case '6':
-                        report= false;
+                        //Top 5 artistas por rating
+                        rateArt->topFive();
                         break;
 
 

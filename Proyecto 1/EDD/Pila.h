@@ -50,6 +50,8 @@ public:
     Song* peek();
     void report(string name);
     NodoP* getCima(){return cima;}
+    void report();
+
 
 
 private:

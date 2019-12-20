@@ -1,4 +1,0 @@
-digraph G { 
-node [shape = record];
-2[label= " {Young and Aspiring} " ] 
-}

@@ -421,7 +421,7 @@ void Cubo::generarReporte(string nameArt)
 
 
     ///Inicio archivo .dot
-    archivo.open("report\\"+nameArt+"_Discografy.dot", ios::out);
+    archivo.open("report\\Discografy.dot", ios::out);
     archivo << "digraph G { \n";
     archivo << "rankdir = TB;";
     archivo << "node [shape=rectangle, height=0.5, width=0.5];\n";
@@ -781,9 +781,9 @@ void Cubo::generarReporte(string nameArt)
     archivo <<"}";
 
     archivo.close();
-    string crear = "dot.exe -Tpng report\\" +nameArt+"_Discografy.dot -o report\\" + nameArt+ "_Discografy.png";
+    string crear = "dot.exe -Tpng report\\Discografy.dot -o report\\Discografy.png";
     system(crear.c_str());
-    string i = "report\\"+ nameArt+"_Discografy.png";
+    string i = "report\\Discografy.png";
     system(i.c_str());
 }
 

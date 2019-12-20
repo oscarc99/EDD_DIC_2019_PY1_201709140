@@ -151,7 +151,7 @@ void ListaSimple::report(string name)
     else
     {
         ///Inicio archivo .dot
-        archivo.open("report\\"+name+".dot", ios::out);
+        archivo.open("report\\canciones.dot", ios::out);
         archivo << "digraph R { \n";
         archivo << "rankdir = RL;";
         archivo << "node [shape=rectangle, height=0.5, width=0.5];\n";
@@ -182,9 +182,9 @@ void ListaSimple::report(string name)
 
 
         archivo.close();
-        string crear = "dot.exe -Tpng report\\"+name+".dot -o report\\"+name+".png";
+        string crear = "dot.exe -Tpng report\\canciones.dot -o report\\canciones.png";
         system(crear.c_str());
-        string s="report\\"+name+".png" ;
+        string s="report\\canciones.png" ;
         system(s.c_str());
     }
 }

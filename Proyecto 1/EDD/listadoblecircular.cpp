@@ -111,7 +111,7 @@ void ListaDobleCicular::report(NodoDC* pintar)
         while (c<this->getSize())
         {
             if (temp->getDato()->getName().compare(pintar->getDato()->getName())==0){
-                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ;style = filled ; fillcolor= blue];\n";
+                nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ;style = filled ; fillcolor= skyblue];\n";
             }else{
                 nodo = nodo + "node"+ to_string(c) +" [label = \" "+ temp->getDato()->getName() + " \" ];\n";
             }

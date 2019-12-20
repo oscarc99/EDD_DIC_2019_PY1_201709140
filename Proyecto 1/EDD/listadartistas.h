@@ -14,6 +14,7 @@ public:
 	node* getBefore(){return before;}
 	Artist* getDato(){return data;}
 
+
 	node(Artist* dato){
 		this->data = dato;
 		next = 0;
@@ -37,7 +38,9 @@ class ListaDArtistas
         bool isEmpty(){return size == 0;}
         virtual ~ListaDArtistas();
         void insertOrdenado(Artist* a);
+        void insertOrdenadoRate(Artist* a);
         void report();
+        void topFive();
 
 
     private:

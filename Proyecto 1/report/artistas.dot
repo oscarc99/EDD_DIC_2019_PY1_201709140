@@ -1,8 +1,0 @@
-digraph R { 
-rankdir = LR;node [shape=rectangle, height=0.5, width=0.5];
-graph[ nodesep = 0.5];
-node0 [label = " Bring Me The Horizon " ];
-node1 [label = " NF " ];
-node2 [label = " The Almost " ];
-node3 [label = " The Devil Wears Prada " ];
- node0 ->  node1 ->  node2 -> node3 [dir=both];}

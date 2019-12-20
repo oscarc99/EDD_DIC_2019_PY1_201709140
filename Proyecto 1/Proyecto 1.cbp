@@ -67,6 +67,8 @@
 		<Unit filename="EDD/discografy.h" />
 		<Unit filename="EDD/hoja.cpp" />
 		<Unit filename="EDD/hoja.h" />
+		<Unit filename="EDD/listadalbum.cpp" />
+		<Unit filename="EDD/listadalbum.h" />
 		<Unit filename="EDD/listadartistas.cpp" />
 		<Unit filename="EDD/listadartistas.h" />
 		<Unit filename="EDD/listadoblecircular.cpp" />

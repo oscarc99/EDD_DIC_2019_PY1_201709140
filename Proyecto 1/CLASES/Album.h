@@ -15,10 +15,12 @@ class Album
         string getName(){return Name;}
         string getMonth(){return Month;}
         string getYear(){return Year;}
+        double getRating(){return rate;}
+        void setRating(double r){rate= r;}
         ListaSimple* getCanciones(){return canciones;}
         void setIndice(int index){indice=index;}
         int getIndice(){return indice;}
-        void setRak();
+
 
 
 
@@ -28,7 +30,7 @@ class Album
         string Name;
         string Month;
         string Year;
-        int ranking;
+        double rate;
         ListaSimple*canciones = new ListaSimple();
         int indice;
 

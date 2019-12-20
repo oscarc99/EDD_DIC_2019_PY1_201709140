@@ -164,6 +164,33 @@ void ListaDArtistas::insertOrdenado(Artist* art ){
 
 
 
+void ListaDArtistas::insertOrdenadoRate(Artist* art ){
+            if(this->isEmpty()){
+            this->add_first(art); return;
+        }
+        int posicion = 0;
+        node *aux = this->getFirst();
+        while(aux!=0){
+            if(art->getRating() < this->getFirst()->getDato()->getRating() ){
+                    posicion=0; break;
+            }
+            if(art->getRating() > this->getLast()->getDato()->getRating() ){
+                    posicion=size; break;
+            }
+            if(art->getRating() > aux->getDato()->getRating() ){
+                    posicion++;
+            }
+            if(art->getRating() < aux->getDato()->getRating()){ break;}
+            aux = aux->getNext();
+        }
+        this->add_at(art, posicion);
+
+
+}
+
+
+
+
 void ListaDArtistas::report(){
     string nodo="";
     string dir="";
@@ -218,4 +245,64 @@ void ListaDArtistas::report(){
         system(s.c_str());
     }
 }
+
+
+void ListaDArtistas::topFive(){
+    string nodo="";
+    string dir="";
+    node* temp = this->getLast();
+    ofstream archivo;
+    if (this->isEmpty())
+    {
+
+    }
+    else
+    {
+        ///Inicio archivo .dot
+        archivo.open("report\\topArtistas.dot", ios::out);
+        archivo << "digraph R { \n";
+        archivo << "rankdir = LR;";
+        archivo << "node [shape=rectangle, height=0.5, width=0.5];\n";
+        archivo << "graph[ nodesep = 0.5];\n";
+        int c= 0;
+        while (temp!= 0 && c<5){
+
+            nodo = nodo + "node"+ to_string(c) +" [label = \" TOP"+to_string(c+1)+". "+to_string(temp->getDato()->getRating())+".  "+ temp->getDato()->getName() + " \" ];\n";
+            if(c!=4){
+                if(temp->getBefore()!=0){
+                cout << c << endl;
+               dir = dir + " node"+to_string(c)+ " -> ";
+            }else{
+
+                dir = dir + "node"+to_string(c)+" [dir=both];";
+            }
+            }else{
+                dir = dir + "node"+to_string(c)+" [dir=both];";
+            }
+
+            c++;
+
+            temp = temp->getBefore();
+        }
+
+        archivo << nodo;
+        archivo << dir;
+
+        archivo <<"}";
+
+
+        archivo.close();
+        string crear = "dot.exe -Tpng report\\topArtistas.dot -o report\\topArtistas.png";
+        system(crear.c_str());
+
+        string s="report\\topArtistas.png" ;
+        system(s.c_str());
+    }
+
+
+
+
+}
+
+
 
