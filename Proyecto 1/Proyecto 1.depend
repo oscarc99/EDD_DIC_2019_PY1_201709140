@@ -76,12 +76,12 @@
 	<iostream>
 	<string.h>
 
-1576657293 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\pila.cpp
+1576814004 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\pila.cpp
 	"Pila.h"
 	<fstream>
 	<string>
 
-1576811434 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cola.cpp
+1576814025 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cola.cpp
 	"Cola.h"
 	<fstream>
 	<string>
@@ -101,7 +101,7 @@
 	"Song.h"
 	<string>
 
-1576738765 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cubo.cpp
+1576817048 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\cubo.cpp
 	"Cubo.h"
 	<sstream>
 	<fstream>
@@ -451,7 +451,7 @@
 1576597294 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\hoja.h
 	"playlist.h"
 
-1576665664 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadoblecircular.cpp
+1576814129 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadoblecircular.cpp
 	"listadoblecircular.h"
 	<sstream>
 	<fstream>
@@ -497,7 +497,7 @@
 
 1576383225 c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\discografy.h
 
-1576665324 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadsongs.cpp
+1576814297 source:c:\users\oscar c\desktop\usac\vd2019\edd\proyecto 1\proyecto 1\edd\listadsongs.cpp
 	"listadsongs.h"
 	<sstream>
 	<fstream>

@@ -439,6 +439,9 @@ void Cubo::generarReporte(string nameArt)
 
 
         alinea = alinea + "{ rank = same;";
+
+        //RECORRO
+        //IDA
         ///recorro de ia la fila selecionada
         while(Head->getDerecha() != 0)
         {
@@ -506,7 +509,7 @@ void Cubo::generarReporte(string nameArt)
             if (Head->getDerecha() != 0)
             {
 
-                dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getDerecha()->getY()+""+to_string(Head->getDerecha()->getX())+ "; \n";
+                dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getDerecha()->getY()+""+to_string(Head->getDerecha()->getX())+"[dir = both]; \n";
             }
 
             Head = Head->getDerecha();
@@ -567,12 +570,14 @@ void Cubo::generarReporte(string nameArt)
             }
         }
 
+
+        //REGRESO
         ///Debo regresar (izquierda) a root
         while(Head->getIzquierda() != 0)
         {
             if (Head->getIzquierda() != 0)
             {
-                dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getIzquierda()->getY()+""+to_string(Head->getIzquierda()->getX())+ "; \n";
+                //dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getIzquierda()->getY()+""+to_string(Head->getIzquierda()->getX())+ "; \n";
             }
 
             Head = Head->getIzquierda();
@@ -645,7 +650,7 @@ void Cubo::generarReporte(string nameArt)
                 ///direccion de los apuntadores
                 if (Head->getDerecha() != 0)
                 {
-                    dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getDerecha()->getY()+""+to_string(Head->getDerecha()->getX())+ "[constraint=false]; \n";
+                    dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getDerecha()->getY()+""+to_string(Head->getDerecha()->getX())+ "[dir = both]; \n";
                 }
 
                 Head = Head->getDerecha();
@@ -710,7 +715,7 @@ void Cubo::generarReporte(string nameArt)
             {
                 if (Head->getIzquierda() != 0)
                 {
-                    dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getIzquierda()->getY()+""+to_string(Head->getIzquierda()->getX())+ "[constraint=false]; \n";
+                    //dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getIzquierda()->getY()+""+to_string(Head->getIzquierda()->getX())+ "[constraint=false]; \n";
                 }
 
                 Head = Head->getIzquierda();
@@ -729,7 +734,7 @@ void Cubo::generarReporte(string nameArt)
         while (Head->getAdelante()!= 0)
         {
 
-            dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAdelante()->getY()+""+to_string(Head->getAdelante()->getX())+ "; \n";
+            dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAdelante()->getY()+""+to_string(Head->getAdelante()->getX())+"[dir = both]; \n";
 
             Head = Head->getAdelante();
 
@@ -737,7 +742,7 @@ void Cubo::generarReporte(string nameArt)
         while (Head->getAtras()!= 0)
         {
 
-            dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAtras()->getY()+""+to_string(Head->getAtras()->getX())+ "; \n";
+            //dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAtras()->getY()+""+to_string(Head->getAtras()->getX())+ "; \n";
             Head= Head->getAtras();
         }
 
@@ -748,7 +753,7 @@ void Cubo::generarReporte(string nameArt)
             while (Head->getAdelante()!= 0)
             {
 
-                dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAdelante()->getY()+""+to_string(Head->getAdelante()->getX())+ "; \n";
+                dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAdelante()->getY()+""+to_string(Head->getAdelante()->getX())+"[dir = both]; \n";
 
                 Head = Head->getAdelante();
 
@@ -756,7 +761,7 @@ void Cubo::generarReporte(string nameArt)
             while (Head->getAtras()!= 0)
             {
 
-                dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAtras()->getY()+""+to_string(Head->getAtras()->getX())+ "; \n";
+                //dir = dir + "node"+Head->getY()+to_string(Head->getX())+ " -> "+"node"+Head->getAtras()->getY()+""+to_string(Head->getAtras()->getX())+ "; \n";
                 Head= Head->getAtras();
             }
 
